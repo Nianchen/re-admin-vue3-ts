@@ -25,10 +25,10 @@
             ></span
           >
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" v-if="UserState === '1'">
           <UsergroupAddOutlined />
           <span
-            ><router-link to="/Message" style="color: white"
+            ><router-link to="/UserManage" style="color: white"
               >用户管理</router-link
             ></span
           >
@@ -41,7 +41,7 @@
             ></span
           >
         </a-menu-item>
-        <a-menu-item key="4">
+        <!-- <a-menu-item key="4">
           <CommentOutlined />
           <span
             ><router-link to="/Tisk" style="color: white"
@@ -56,7 +56,7 @@
               >消息通知</router-link
             ></span
           >
-        </a-menu-item>
+        </a-menu-item> -->
         <a-menu-item key="6" @click="() => (collapsed = !collapsed)">
           <menu-unfold-outlined v-if="collapsed" />
           <menu-fold-outlined v-else />
@@ -87,7 +87,7 @@
     </a-layout>
   </a-layout>
 </template>
-<script>
+<script lang="ts" setup>
 import Topaside from '../components/Topaside'
 import {
   UserOutlined,
@@ -95,40 +95,24 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   CalendarOutlined,
-  CommentOutlined,
-  MailOutlined,
+  // CommentOutlined,
+  // MailOutlined,
   ArrowLeftOutlined,
-  
 } from "@ant-design/icons-vue";
-import { defineComponent, ref } from "vue";
+import {  ref,computed } from "vue";
 import { useRouter } from "vue-router";
-export default defineComponent({
-  components: {
-    UserOutlined,
-    UsergroupAddOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    CalendarOutlined,
-    CommentOutlined,
-    MailOutlined,
-    ArrowLeftOutlined,
-    Topaside
-  },
-  setup() {
+import store from '@/store'
+    const collapsed = ref(false)
     const selectedKeys = ref(["0"]);
     const router = useRouter();
+    console.log(store);
+    const UserState = computed(()=>store.getters.GetUserState)
+    console.log(UserState);
     router.push("/");
     const LoginOut = () => {
       localStorage.clear("User_info");
       router.push("/Login");
     };
-    return {
-      collapsed: ref(true),
-      selectedKeys,
-      LoginOut,
-    };
-  },
-});
 </script>
 <style>
 #components-layout-demo-custom-trigger .trigger {

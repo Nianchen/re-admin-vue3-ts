@@ -3,9 +3,7 @@ import Login from '../views/login/index.vue'
 import UserManage from '../components/UserManage/index.vue' 
 import User from '../components/User/index.vue' 
 import Myinde from '../layout/index.vue' 
-import TaskList from'../components/TaskList/index.vue'
-import Dashboard from'../components/Dashboard/index.vue'
-
+import store from "@/store";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
@@ -25,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Myinde,
     children: [
       {
-        path: '/Message',
+        path: '/UserManage',
         component: UserManage
       },
       {
@@ -34,10 +32,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/Tisk',
-        component: TaskList,
-        children:[
-       
-        ]
+        component: ()=> import('../components/TaskList/index.vue'),
       },
     ]
   },
@@ -53,6 +48,8 @@ router.beforeEach( ( to, from, next ) =>
 {
   if ( localStorage.getItem( 'User_info' ) )
   {
+    store.commit("SetUserinfo",JSON.parse(localStorage.getItem( 'User_info' )!))
+    //先做静态权限管理
     if ( to.path == '/Login' )
     {
       next( '/User' );

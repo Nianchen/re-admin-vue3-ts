@@ -48,10 +48,15 @@
       <a-row :gutter="16">
         <a-col :span="14">
           <a-form-item label="开始时间" name="Start_Time">
-            <a-date-picker
+            <!-- <a-date-picker
               v-model:value="form.Start_Time"
               style="width: 100%"
               :get-popup-container="(trigger) => trigger.parentNode"
+            /> -->
+             <a-date-picker
+              v-model:value="form.Start_Time"
+              style="width: 100%"
+          
             />
           </a-form-item>
         </a-col>
@@ -88,7 +93,7 @@
 </template>
 <script lang="ts" setup>
 import { PlusOutlined } from "@ant-design/icons-vue";
-import { defineComponent, reactive, ref, defineEmits } from "vue";
+import {  reactive, ref, defineEmits } from "vue";
 import { Tisk } from "@/api/type";
 import { AddTisk } from "@/api/api";
 const emits = defineEmits(["onGet"]);
@@ -133,7 +138,7 @@ const showPubDrawer = () => {
 };
 const onSubmit = async () =>{
   try {
-        const values = await formRef.value.validateFields();
+        // const values = await formRef.value.validateFields();
         await AddTisk(form)
         emits('onGet')
         Addvisible.value = false

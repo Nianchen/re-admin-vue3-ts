@@ -2,7 +2,8 @@ export interface User {
     Username:string,
     Password:string,
     id:string,
-    Usermessage:string
+    Usermessage:string,
+    UserState:string
   }
 
 

@@ -36,9 +36,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineComponent, reactive, ref, toRaw } from "vue";
+import { reactive, ref } from "vue";
 import type { FormInstance } from "ant-design-vue";
-import { AddUser, IsNewUser } from "@/api/api";
+import { AddUser,  } from "@/api/api";
 import { message } from 'ant-design-vue';
 const emit = defineEmits(["add"])
 interface AddUsertype {
@@ -57,7 +57,7 @@ const formState = reactive<AddUsertype>({
 const onOk = () => {
   formRef.value
     .validateFields()
-    .then(async (values) => {
+    .then(async () => {
     let flag = await AddUser(formState)
     if(flag){
         visible.value = false;

@@ -3,7 +3,7 @@ import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 
 const request: AxiosInstance = axios.create({
     baseURL: "http://localhost:5555",
-    timeout: 5000
+    timeout: 8000
 })
 
 request.interceptors.response.use(

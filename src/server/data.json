@@ -4,59 +4,117 @@
       "id": "2",
       "Username": "admin",
       "Password": "admin",
-      "Usermessage": "覆盖测试111"
+      "UserState": "1",
+      "Usermessage": "管理员"
     },
     {
-      "Username": "student1",
-      "Password": "123",
-      "Usermessage": "覆盖测试111",
-      "id": "tt1b-4G"
-    },
-    {
-      "Username": "admin1",
-      "Password": "admin1",
-      "Usermessage": "覆盖测试111",
-      "id": "p2YqkGL"
+      "Username": "user",
+      "Password": "user",
+      "Usermessage": "模拟用户",
+      "id": "je6R94T",
+      "UserState": "0"
     }
   ],
   "Tisk": [
     {
-      "Tisk_title": "测试任务1",
-      "Tisk_status": 0,
-      "Tisk_Details": "测试任务内容",
+      "Tisk_title": "测试发布任务1",
+      "Tisk_status": 1,
+      "Tisk_Details": "测试发布任务1",
       "Start_Time": "",
       "id": "lA-e4ut"
     },
     {
-      "Tisk_title": "测试任务2",
+      "Tisk_title": "测试发布任务2",
       "Tisk_status": 1,
-      "Tisk_Details": "测试任务内容",
+      "Tisk_Details": "测试发布任务2",
       "Start_Time": "",
       "id": "K7f0H12"
     },
     {
-      "Tisk_title": "测试发布",
-      "Tisk_status": 0,
-      "Tisk_Details": "测试发布",
-      "Start_Time": "2023-04-14T03:23:16.807Z",
-      "Tisk_type": "1",
-      "id": "jw7MFKD"
-    },
-    {
-      "Tisk_title": "测试发布2",
-      "Tisk_status": 0,
-      "Tisk_Details": "111",
+      "Tisk_title": "测试发布任务3 ",
+      "Tisk_status": 1,
+      "Tisk_Details": "测试发布任务3",
       "Start_Time": "2023-04-06T03:24:52.657Z",
       "Tisk_type": "0",
       "id": "SVCc8mP"
     },
     {
-      "Tisk_title": "测试发布",
-      "Tisk_status": 0,
-      "Tisk_Details": "123213",
+      "Tisk_title": "测试进行中任务1",
+      "Tisk_status": 1,
+      "Tisk_Details": "测试进行中任务1",
       "Start_Time": "2023-04-06T03:26:39.451Z",
       "Tisk_type": "0",
       "id": "LMoqyca"
+    },
+    {
+      "Tisk_title": "测试进行中任务2",
+      "Tisk_status": 1,
+      "Tisk_Details": "测试进行中任务1",
+      "Start_Time": "2023-04-12T12:34:20.954Z",
+      "Tisk_type": "1",
+      "id": "G-ztfDQ"
+    },
+    {
+      "Tisk_title": "测试发布结束任务",
+      "Tisk_status": 2,
+      "Tisk_Details": "结束任务",
+      "Start_Time": "2023-03-29T06:31:16.250Z",
+      "Tisk_type": "0",
+      "id": "_gqDinI"
+    },
+    {
+      "Tisk_title": "测试发布结束任务",
+      "Tisk_status": 2,
+      "Tisk_Details": "12323",
+      "Start_Time": "2023-04-12T06:31:51.473Z",
+      "Tisk_type": "1",
+      "id": "a7onVId"
+    }
+  ],
+  "UserOnTisk": [
+    {
+      "id": "je6R94T",
+      "UserTiskList": [
+        {
+          "Tisk_title": "测试进行中任务1",
+          "Tisk_status": 1,
+          "Tisk_Details": "测试进行中任务123123123",
+          "Start_Time": "2023-04-06T03:26:39.451Z",
+          "Tisk_type": "0",
+          "id": "LMoqyca"
+        },
+        {
+          "Tisk_title": "测试发布任务1",
+          "Tisk_status": 0,
+          "Tisk_Details": "测试发布任务1",
+          "Start_Time": "",
+          "id": "lA-e4ut"
+        },
+        {
+          "Tisk_title": "测试发布任务2",
+          "Tisk_status": 0,
+          "Tisk_Details": "测试发布任务2",
+          "Start_Time": "",
+          "id": "K7f0H12"
+        },
+        {
+          "Tisk_title": "测试发布任务3 ",
+          "Tisk_status": 0,
+          "Tisk_Details": "测试发布任务3",
+          "Start_Time": "2023-04-06T03:24:52.657Z",
+          "Tisk_type": "0",
+          "id": "SVCc8mP"
+        }
+      ]
+    }
+  ],
+  "Router": [
+    {
+      "id": 1,
+      "Route": {
+        "path": "/Tisk",
+        "component": "()=> import('../components/TaskList/index.vue')"
+      }
     }
   ]
 }

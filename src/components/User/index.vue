@@ -62,9 +62,9 @@ import { UserOutlined } from "@ant-design/icons-vue";
 .User_content {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   height: 100%;
   width: 100%;
+  flex-wrap: wrap;
 }
 .User_info {
   display: flex;
@@ -88,7 +88,7 @@ import { UserOutlined } from "@ant-design/icons-vue";
   list-style: none;
 }
 .User_right{
-  width: 74%;
+  width: 70%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -139,5 +139,14 @@ import { UserOutlined } from "@ant-design/icons-vue";
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+@media screen and (max-width: 1600px){ 
+  .User_info{
+    width: 100%;
+  }
+  .User_right{
+    width: 100%;
+  }
+  
 }
 </style>

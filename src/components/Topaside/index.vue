@@ -1,7 +1,7 @@
 <template>
   <div class="top_aside">
     <div class="text">
-        this is txt  -------txt
+        {{ store.state.Userinfo.UserState == 1 ? '管理员' : "用户"}}
     </div>
     <div class="user">
       <span style="margin-right: 10px">
@@ -34,6 +34,9 @@
 </template>
 <script setup lang="ts">
 import { UserOutlined ,DownOutlined } from "@ant-design/icons-vue";
+import { useStore } from "vuex";
+const store = useStore()
+
 </script>
 <style scoped>
 .top_aside {
