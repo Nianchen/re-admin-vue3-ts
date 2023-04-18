@@ -52,12 +52,9 @@ Password: ""
 
 const Login_Submit = async () => {
   if(await Login(User_info)){
-    router.push('/User')
+    router.push('/index')
   }
 };
-if(localStorage.getItem('User_info')){
-  router.push('/User')
-}
 window.addEventListener('keydown',(e)=>{
   if(e.key=='Enter'){
     Login_Submit()

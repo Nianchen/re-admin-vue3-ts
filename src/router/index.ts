@@ -11,10 +11,6 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/Login',
   },
   {
-    path:"/:pathMatch(.*)",
-    redirect:"/Login"
-  },
-  {
     path: "/Login",
     component: Login,
   },
@@ -33,40 +29,39 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/Tisk',
         component: ()=> import('../components/TaskList/index.vue'),
+        children:[]
       },
+      {
+        path:"/TiskSubmit",
+        name:"TiskSubmit",
+        component: () => import("../components/TaskList/TiskSubmit.vue"),
+    }
     ]
   },
 ];
+
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 
-
 router.beforeEach( ( to, from, next ) =>
 {
-  if ( localStorage.getItem( 'User_info' ) )
+  if ( localStorage.getItem( 'User_info' ))
   {
     store.commit("SetUserinfo",JSON.parse(localStorage.getItem( 'User_info' )!))
     //先做静态权限管理
-    if ( to.path == '/Login' )
-    {
-      next( '/User' );
-    } else
-    {
-      next();
+    next()
+  }else{
+    if(to.path == '/Login'){
+        next()
+    }else{
+       next('/Login')
     }
-  } 
-  else
-  {
-    if ( to.path == '/Login' )
-    {
-      next();
-    } else
-    {
-      next( '/Login' );
-    }
+
   }
 })
+
 export default router;

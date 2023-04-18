@@ -76,7 +76,7 @@
         :style="{
           margin: '20px 16px',
           padding: '12px',
-          background: '#eef0f3',
+          background: '#ffffff',
           minHeight: '280px',
           overflow: 'scroll',
           overflowX: 'hidden',
@@ -88,7 +88,7 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import Topaside from '../components/Topaside'
+import Topaside from '../components/Topaside/index.vue'
 import {
   UserOutlined,
   UsergroupAddOutlined,
@@ -105,10 +105,8 @@ import store from '@/store'
     const collapsed = ref(false)
     const selectedKeys = ref(["0"]);
     const router = useRouter();
-    console.log(store);
     const UserState = computed(()=>store.getters.GetUserState)
     console.log(UserState);
-    router.push("/");
     const LoginOut = () => {
       localStorage.clear("User_info");
       router.push("/Login");

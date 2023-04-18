@@ -18,6 +18,7 @@ import { ref, defineProps } from "vue";
 const props = defineProps({
   id: String,
 });
+// console.log(props);
 const Detailvisible = ref(false);
 const showDetailDrawer = () => {
   Detailvisible.value = true;

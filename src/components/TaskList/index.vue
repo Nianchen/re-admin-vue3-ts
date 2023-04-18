@@ -10,6 +10,7 @@
         @change="UpdataTiskList"
       >
         <a-tab-pane key="0" tab="已发布">
+          <a-empty v-show="TiskList.length === 0" />
           <div class="tisklist">
             <a-card
               v-for="item in TiskList"
@@ -43,6 +44,7 @@
           </div>
         </a-tab-pane>
         <a-tab-pane key="1" tab="进行中" force-render>
+          <a-empty v-if="TiskList.length === 0" />
           <div class="tisklist">
             <a-card
               v-for="item in TiskList"
@@ -62,12 +64,18 @@
               <p>开始时间：{{ item.Start_Time.split("T")[0] }}</p>
               <div class="Useroperate">
                 <a-button type="link" v-if="UserState === '0'"
-                  >提交任务</a-button
+                  ><router-link
+                    :to="{ name: 'TiskSubmit', query: { Tiskid: item.id } }"
+                    >提交任务</router-link
+                  ></a-button
                 >
                 <a-button type="link" @click="Delete(item.id!)" v-else
                   >删除任务</a-button
                 >
-                <a-button type="link" v-if="UserState === '0'"
+                <a-button
+                  type="link"
+                  v-if="UserState === '0'"
+                  @click="GiveUp(item.id!)"
                   >放弃任务</a-button
                 >
                 <TiskDetial :id="item.id"></TiskDetial>
@@ -76,6 +84,7 @@
           </div>
         </a-tab-pane>
         <a-tab-pane key="2" tab="已完成">
+          <a-empty v-if="TiskList.length === 0" />
           <div class="tisklist">
             <a-card
               v-for="item in TiskList"
@@ -94,7 +103,6 @@
               </p>
               <p>结束时间：{{ item.Start_Time.split("T")[0] }}</p>
               <div class="Useroperate">
-    
                 <TiskDetial :id="item.id"></TiskDetial>
               </div>
             </a-card>
@@ -107,22 +115,24 @@
 <script setup lang="ts">
 import TiskPub from "./TiskPub.vue";
 import TiskDetial from "./TaskDetail.vue";
+import store from "@/store";
 import { Tisk } from "@/api/type";
 import { ref, reactive, computed } from "vue";
+
 import {
   DeleteTisk,
   GetTiskList,
   GetAcceptTiskList,
   GetEndTiskList,
   AcceptTisk,
+  GiveUpTisk,
 } from "@/api/api";
-import store from "@/store";
 const TiskState = ref("0");
 const UserState = computed(() => store.getters.GetUserState);
 const TiskList = reactive<Tisk[]>([]);
 const UpdataTiskList = async () => {
   TiskList.length = 0;
-  let result = null;
+  let result = [];
   switch (TiskState.value) {
     case "0":
       result = await GetTiskList();
@@ -134,15 +144,20 @@ const UpdataTiskList = async () => {
       result = await GetEndTiskList();
       break;
   }
-  TiskList.push(...result);
+
+    TiskList.push(...result); 
 };
 UpdataTiskList();
-const Accept = async (Tiskid:string)=>{
-  await AcceptTisk(Tiskid)
-  UpdataTiskList()
-}
+const Accept = async (Tiskid: string) => {
+  await AcceptTisk(Tiskid);
+  UpdataTiskList();
+};
 const Delete = async (Tiskid: string) => {
   await DeleteTisk(Tiskid);
+  UpdataTiskList();
+};
+const GiveUp = async (Tiskid: string) => {
+  await GiveUpTisk(Tiskid);
   UpdataTiskList();
 };
 </script>

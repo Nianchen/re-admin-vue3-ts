@@ -28,6 +28,12 @@
         >
           <a-input v-model:value="formState.Password" />
         </a-form-item>
+        <a-form-item>
+          <a-radio-group v-model:value="formState.UserState">
+      <a-radio :value="0">普通用户</a-radio>
+      <a-radio :value="1">管理员</a-radio>
+    </a-radio-group>
+        </a-form-item>
         <a-form-item name="Usermessage" label="用户描述">
           <a-textarea v-model:value="formState.Usermessage" />
         </a-form-item>
@@ -45,6 +51,7 @@ interface AddUsertype {
   Username: string;
   Password: string;
   Usermessage: string;
+  UserState:string
 }
 const formRef = ref<FormInstance>();
 const visible = ref(false);
@@ -52,6 +59,7 @@ const formState = reactive<AddUsertype>({
   Username: "",
   Password: "",
   Usermessage: "",
+  UserState:""
 });
 
 const onOk = () => {
