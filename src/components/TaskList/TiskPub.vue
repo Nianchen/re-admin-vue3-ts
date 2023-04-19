@@ -22,17 +22,7 @@
         </a-col>
       </a-row>
       <a-row :gutter="16">
-        <!-- <a-col :span="12">
-              <a-form-item label="Owner" name="owner">
-                <a-select
-                  placeholder="Please a-s an owner"
-                  v-model:value="form.owner"
-                >
-                  <a-select-option value="xiao">Xiaoxiao Fu</a-select-option>
-                  <a-select-option value="mao">Maomao Zhou</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col> -->
+  
         <a-col :span="12">
           <a-form-item label="类型" name="Tisk_type">
             <a-select

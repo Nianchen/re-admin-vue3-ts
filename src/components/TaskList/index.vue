@@ -101,9 +101,9 @@
                 -webkit-box-orient: vertical; -webkit-line-clamp:
                 5;果这里很长如果这里很长如果这里很长如果这里很长
               </p>
-              <p>结束时间：{{ item.Start_Time.split("T")[0] }}</p>
+              <p>结束时间：{{ item.End_Time }}</p>
               <div class="Useroperate">
-                <TiskDetial :id="item.id"></TiskDetial>
+                <TiskDetial :id="item.id" :Tiskstatus="item.Tisk_status"></TiskDetial>
               </div>
             </a-card>
           </div>
@@ -118,7 +118,6 @@ import TiskDetial from "./TaskDetail.vue";
 import store from "@/store";
 import { Tisk } from "@/api/type";
 import { ref, reactive, computed } from "vue";
-
 import {
   DeleteTisk,
   GetTiskList,

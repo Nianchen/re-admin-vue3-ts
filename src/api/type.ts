@@ -21,8 +21,13 @@ export interface LoginForm{
 export interface Tisk{
   Tisk_title:string;
   Tisk_status:number;
+  Process_status:number;
   Tisk_Details:string;
   Tisk_type:string;
   Start_Time:string;
+  End_Time:string;
+  Submit_content:string;
+  Accept_User:string;
   id?:string;
 }
+

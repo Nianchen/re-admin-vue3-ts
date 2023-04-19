@@ -106,7 +106,6 @@ import store from '@/store'
     const selectedKeys = ref(["0"]);
     const router = useRouter();
     const UserState = computed(()=>store.getters.GetUserState)
-    console.log(UserState);
     const LoginOut = () => {
       localStorage.clear("User_info");
       router.push("/Login");

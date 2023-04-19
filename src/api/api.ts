@@ -8,6 +8,7 @@ import { User, AddUser, LoginForm, Tisk } from "./type";
 import Myhttp from "./request";
 import store from "@/store";
 import { message } from "ant-design-vue";
+import {format} from '@/utils/utils'
 export async function GetUserList () {
   return Myhttp.get<User[]>('/User')
 }
@@ -58,8 +59,8 @@ export async function Login (Form: LoginForm) {
   }
 }
 
-export async function GetTiskDetail(Tiskid:string){
-  return Myhttp.get("/Tisk?id=" +Tiskid)
+export async function GetTiskDetail (Tiskid: string) {
+  return Myhttp.get("/Tisk?id=" + Tiskid)
 }
 
 //获取全部任务
@@ -69,21 +70,36 @@ export async function GetTiskList () {
 
 //获取进行中任务
 export async function GetAcceptTiskList () {
-  const { UserState} = store.state.Userinfo
+  const { UserState, id } = store.state.Userinfo
   switch (UserState) {
     case '0':
       {
-        const UserAcceptTiskList = await Myhttp.get('/UserOnTisk?id=je6R94T')
-        return UserAcceptTiskList[0].UserTiskList
+        const AllList = await Myhttp.get('/Tisk?Tisk_status=1')
+        const UserOffList = (await Myhttp.get('/UserOnTisk?id=' + id))[0].UserOnTiskList
+        return AllList.filter((item: any) => {
+          return UserOffList.includes(item.id)
+        })
       }
-      case '1':
-        return Myhttp.get('/Tisk?Tisk_status=1');
+    case '1':
+      return Myhttp.get('/Tisk?Tisk_status=1');
   }
 }
 
 //获取结束任务
 export async function GetEndTiskList () {
-  return Myhttp.get('/Tisk?Tisk_status=2')
+  const { UserState, id } = store.state.Userinfo
+  switch (UserState) {
+    case '0':
+      {
+        const AllList = await Myhttp.get('/Tisk?Tisk_status=2')
+        const UserOffList = (await Myhttp.get('/UserOffTisk?id=' + id))[0].UserOffTiskList
+        return AllList.filter((item: any) => {
+          return UserOffList.includes(item.id)
+        })
+      }
+    case '1':
+      return Myhttp.get('/Tisk?Tisk_status=2')
+  }
 }
 
 //添加任务
@@ -98,33 +114,49 @@ export async function DeleteTisk (Tiskid: string) {
 
 //接受任务
 export async function AcceptTisk (Tiskid: string) {
-  //结构出来用户的id
   const { id } = store.state.Userinfo
-  //通过任务id拿到任务详情进行添加  
-  //并且在此修改人物的状态
-  const Tiskresult = await Myhttp.get("/Tisk?id=" + Tiskid)
+  //结构出来用户的id
   await Myhttp.patch("Tisk/" + Tiskid, { Tisk_status: 1 })
-  //通过人物id添加具体人
-  const UserTiskList = await Myhttp.get('UserOnTisk?id=' + id)
-  UserTiskList[0].UserTiskList.push(...Tiskresult)
+  const UserOnList = (await Myhttp.get('/UserOnTisk?id=' + id))[0].UserOnTiskList
+  UserOnList.push(Tiskid)
   const data = {
-    UserTiskList: []
+    UserOnTiskList:UserOnList
   }
-  data.UserTiskList = UserTiskList[0].UserTiskList
-  return Myhttp.patch("UserOnTisk/" + id, data)
+  return Myhttp.patch("/UserOnTisk/" + id , data)
 }
 
 //放弃任务
 export async function GiveUpTisk (Tiskid: string) {
   const { id } = store.state.Userinfo
   // 结构出来用户id
-  await Myhttp.patch("Tisk/" + Tiskid, { Tisk_status: 0 })
-  const resultList = (await Myhttp.get('/UserOnTisk?id=' + id))[0].UserTiskList.filter((item:any)=>item.id!=Tiskid)
+  await Myhttp.patch("Tisk/" + Tiskid, { Tisk_status: 0, Submit_content: "" })
+  const resultList = (await Myhttp.get('/UserOnTisk?id=' + id))[0].UserOnTiskList.filter((item: any) => item!= Tiskid)
+  console.log(resultList);
   // 过滤需要删除的任务
   const data = {
-    UserTiskList: []
+    UserOnTiskList: []
   }
-  data.UserTiskList = resultList
-  return Myhttp.patch('UserOnTisk/' + id , data)
+  data.UserOnTiskList = resultList
+  return Myhttp.patch('UserOnTisk/' + id, data)
+}
+
+//暂存任务
+export async function SaveSubmit (Tiskid: string, Submit_content: string) {
+  const data = {
+    Submit_content
+  }
+  return Myhttp.patch('Tisk/' + Tiskid, data)
+}
+
+//提交任务
+export async function SubmitTisk (Tiskid: string) {
+  const { id } = store.state.Userinfo
+  const result = await Myhttp.get('/UserOffTisk/' + id)
+  const EndTime = format(new Date())
+  await Myhttp.patch("Tisk/" + Tiskid, { Tisk_status: 2,End_Time:EndTime})
+  if(!result.UserOffTiskList.includes(Tiskid)){
+    result.UserOffTiskList.push(Tiskid) 
+  }
+  return Myhttp.patch("UserOffTisk/" + id, result)
 }
 

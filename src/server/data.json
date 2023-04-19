@@ -24,95 +24,31 @@
   ],
   "Tisk": [
     {
-      "Tisk_title": "测试发布任务2",
-      "Tisk_status": 1,
-      "Tisk_Details": "测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2测试发布任务2",
-      "Start_Time": "2023-04-12",
-      "id": "K7f0H12"
-    },
-    {
-      "Tisk_title": "测试发布任务3 ",
-      "Tisk_status": 1,
-      "Tisk_Details": "测试发布任务3",
-      "Start_Time": "2023-04-06T03:24:52.657Z",
-      "Tisk_type": "0",
-      "id": "SVCc8mP"
-    },
-    {
-      "Tisk_title": "测试进行中任务1",
-      "Tisk_status": 1,
+      "Tisk_title": "全部属性的任务",
+      "Tisk_status": 2,
+      "Process_status": 0,
       "Tisk_Details": "测试进行中任务1",
       "Start_Time": "2023-04-06T03:26:39.451Z",
+      "End_Time": "2023-04-19 20:07:42",
+      "Submit_content": "这里是唯一的一个测试任务",
       "Tisk_type": "0",
+      "Accept_User": "",
       "id": "LMoqyca"
-    },
-    {
-      "Tisk_title": "测试进行中任务2",
-      "Tisk_status": 1,
-      "Tisk_Details": "测试进行中任务1",
-      "Start_Time": "2023-04-12T12:34:20.954Z",
-      "Tisk_type": "1",
-      "id": "G-ztfDQ"
-    },
-    {
-      "Tisk_title": "测试发布结束任务",
-      "Tisk_status": 2,
-      "Tisk_Details": "结束任务",
-      "Start_Time": "2023-03-29T06:31:16.250Z",
-      "Tisk_type": "0",
-      "id": "_gqDinI"
-    },
-    {
-      "Tisk_title": "测试发布结束任务",
-      "Tisk_status": 2,
-      "Tisk_Details": "12323",
-      "Start_Time": "2023-04-12T06:31:51.473Z",
-      "Tisk_type": "1",
-      "id": "a7onVId"
-    },
-    {
-      "Tisk_title": "测试发布21231231",
-      "Tisk_status": 0,
-      "Tisk_Details": "123213",
-      "Start_Time": "2023-04-08T12:18:49.542Z",
-      "Tisk_type": "1",
-      "id": "T-gNlpP"
     }
   ],
   "UserOnTisk": [
     {
       "id": "je6R94T",
-      "UserTiskList": [
-        {
-          "Tisk_title": "测试发布任务2",
-          "Tisk_status": 0,
-          "Tisk_Details": "测试发布任务2",
-          "Start_Time": "",
-          "id": "K7f0H12"
-        },
-        {
-          "Tisk_title": "测试发布任务1",
-          "Tisk_status": 0,
-          "Tisk_Details": "测试发布任务1",
-          "Start_Time": "",
-          "id": "lA-e4ut"
-        },
-        {
-          "Tisk_title": "测试进行中任务1",
-          "Tisk_status": 0,
-          "Tisk_Details": "测试进行中任务1",
-          "Start_Time": "2023-04-06T03:26:39.451Z",
-          "Tisk_type": "0",
-          "id": "LMoqyca"
-        },
-        {
-          "Tisk_title": "测试发布任务3 ",
-          "Tisk_status": 0,
-          "Tisk_Details": "测试发布任务3",
-          "Start_Time": "2023-04-06T03:24:52.657Z",
-          "Tisk_type": "0",
-          "id": "SVCc8mP"
-        }
+      "UserOnTiskList": [
+        "LMoqyca"
+      ]
+    }
+  ],
+  "UserOffTisk": [
+    {
+      "id": "je6R94T",
+      "UserOffTiskList": [
+        "LMoqyca"
       ]
     }
   ],
