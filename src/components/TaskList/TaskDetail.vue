@@ -18,13 +18,13 @@
       <h1>任务报告说明</h1>
       <v-md-editor v-model="text" mode="preview" height="450px"></v-md-editor>
       <div>
-        <a-button type="link" v-if="UserState === '1' && Tiskstatus === 2">更改任务状态</a-button>
         <h2>任务状态</h2>
         <a-steps  :current="TiskDetail.Process_status" status="process">
           <a-step title="任务提交" description="等待发布者审核" />
     <a-step title="任务审核" description="等待审核结束" />
     <a-step title="任务结算" description="等待任务结算" />
   </a-steps>
+  <a-button type="link" v-if="UserState === '1' && Tiskstatus === 2">审核任务</a-button>
       </div>
     </div>
   </a-drawer>

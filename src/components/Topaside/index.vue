@@ -5,7 +5,7 @@
     </div>
     <div class="user">
       <span style="margin-right: 10px">
-    <a-badge :count="1">
+    <a-badge :count="MessageCount">
       <a-avatar shape="square">
         <template #icon><UserOutlined /></template>
       </a-avatar>
@@ -13,19 +13,15 @@
   </span>
   <a-dropdown :trigger="['click']">
     <a class="ant-dropdown-link" @click.prevent>
-      Click me
+      显示更多
       <DownOutlined />
     </a>
     <template #overlay>
       <a-menu>
         <a-menu-item key="0">
-          <a href="http://www.alipay.com/">1st menu item</a>
-        </a-menu-item>
-        <a-menu-item key="1">
-          <a href="http://www.taobao.com/">2nd menu item</a>
+        <router-link to="/UserMessage">个人信息</router-link>
         </a-menu-item>
         <a-menu-divider />
-        <a-menu-item key="3">3rd menu item</a-menu-item>
       </a-menu>
     </template>
   </a-dropdown>
@@ -35,8 +31,9 @@
 <script setup lang="ts">
 import { UserOutlined ,DownOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
+import { GetMessageList } from "@/api/api";
 const store = useStore()
-
+const MessageCount = GetMessageList()
 </script>
 <style scoped>
 .top_aside {

@@ -160,3 +160,14 @@ export async function SubmitTisk (Tiskid: string) {
   return Myhttp.patch("UserOffTisk/" + id, result)
 }
 
+//获取消息
+export async function GetMessageList(){
+  const { id } = store.state.Userinfo
+  const result = await Myhttp.get("/UserMessage?id=" + id)
+  if(result.length == 0){
+      return []
+  }else{
+    console.log(result);
+   return result[0].Messages
+  }
+}

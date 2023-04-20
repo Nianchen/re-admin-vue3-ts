@@ -15,8 +15,7 @@
       <div class="container">
         <div class="form">
           <h2>登录</h2>
-          
-            <div class="inputBox">
+             <div class="inputBox">
               <input
                 type="text"
                 placeholder="姓名"
@@ -33,6 +32,8 @@
             <div class="inputBox">
               <input type="submit" value="登录" @click="Login_Submit" />
             </div>
+  
+           
   
         </div>
       </div>
@@ -52,7 +53,7 @@ Password: ""
 
 const Login_Submit = async () => {
   if(await Login(User_info)){
-    router.push('/User')
+    router.push('/index')
   }
 };
 window.addEventListener('keydown',(e)=>{

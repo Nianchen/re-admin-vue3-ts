@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Login from '../views/login/index.vue'
 import UserManage from '../components/UserManage/index.vue' 
-import User from '../components/User/index.vue' 
+import DateCenter from '../components/DataCenter/index.vue'
 import Myinde from '../layout/index.vue' 
 import store from "@/store";
 const routes: Array<RouteRecordRaw> = [
@@ -23,8 +23,8 @@ const routes: Array<RouteRecordRaw> = [
         component: UserManage
       },
       {
-        path: '/User',
-        component: User
+        path: '/DateCenter',
+        component: DateCenter
       },
       {
         path: '/Tisk',
@@ -35,6 +35,11 @@ const routes: Array<RouteRecordRaw> = [
         path:"/TiskSubmit",
         name:"TiskSubmit",
         component: () => import("../components/TaskList/TiskSubmit.vue"),
+    },
+    {
+      path:"/UserMessage",
+      name:"UserMessage",
+      component:() => import("../components/UserMessage/index.vue")
     }
     ]
   },

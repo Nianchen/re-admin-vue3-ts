@@ -20,8 +20,8 @@
         <a-menu-item key="1">
           <user-outlined />
           <span
-            ><router-link to="/User" style="color: white"
-              >个人中心</router-link
+            ><router-link to="/DateCenter" style="color: white"
+              >数据中心</router-link
             ></span
           >
         </a-menu-item>
@@ -108,7 +108,7 @@ import store from '@/store'
     const UserState = computed(()=>store.getters.GetUserState)
     const LoginOut = () => {
       localStorage.clear("User_info");
-      router.push("/Login");
+      location.reload()
     };
 </script>
 <style>

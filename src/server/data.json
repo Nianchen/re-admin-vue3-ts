@@ -12,7 +12,8 @@
       "Password": "user",
       "Usermessage": "模拟用户",
       "id": "je6R94T",
-      "UserState": "0"
+      "UserState": "0",
+      "Nickname":"小红"
     },
     {
       "Username": "user1",
@@ -29,7 +30,7 @@
       "Process_status": 0,
       "Tisk_Details": "测试进行中任务1",
       "Start_Time": "2023-04-06T03:26:39.451Z",
-      "End_Time": "2023-04-19 20:07:42",
+      "End_Time": "2023-04-20 17:29:37",
       "Submit_content": "这里是唯一的一个测试任务",
       "Tisk_type": "0",
       "Accept_User": "",
@@ -49,6 +50,28 @@
       "id": "je6R94T",
       "UserOffTiskList": [
         "LMoqyca"
+      ]
+    }
+  ],
+  "UserMessage":[
+    {
+      "id":"2",
+      "Messages":[
+        {
+          "Userid":"je6R94T",
+          "Message":"测试发送信息",
+          "Username":"小红"
+        },
+        {
+          "Userid":"je6R94T",
+          "Message":"测试发送信息",
+          "Username":"小红"
+        },
+          {
+          "Userid":"je6R94T",
+          "Message":"测试发送信息",
+          "Username":"小红"
+        }
       ]
     }
   ],
