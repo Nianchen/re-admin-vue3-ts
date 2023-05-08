@@ -13,7 +13,7 @@
       "Usermessage": "模拟用户",
       "id": "je6R94T",
       "UserState": "0",
-      "Nickname":"小红"
+      "Nickname": "小红"
     },
     {
       "Username": "user1",
@@ -30,18 +30,29 @@
       "Process_status": 0,
       "Tisk_Details": "测试进行中任务1",
       "Start_Time": "2023-04-06T03:26:39.451Z",
-      "End_Time": "2023-04-20 17:29:37",
+      "End_Time": "2023-05-08 19:43:27",
       "Submit_content": "这里是唯一的一个测试任务",
       "Tisk_type": "0",
       "Accept_User": "",
       "id": "LMoqyca"
+    },
+    {
+      "Tisk_title": "测试发布10086",
+      "Tisk_status": 2,
+      "Tisk_Details": "1",
+      "Start_Time": "2023-05-03T12:28:49.284Z",
+      "Tisk_type": "0",
+      "id": "jZxQUkk",
+      "Submit_content": "123123的厚爱~~~~~~~~删除线~~~~~~~~|column1|column2|column3|\n|-|-|-|\n|content1|content2|content3|[链接](http://)![Description](http://)``` 123123lang123123uage\n```",
+      "End_Time": "2023-05-08 21:11:41"
     }
   ],
   "UserOnTisk": [
     {
       "id": "je6R94T",
       "UserOnTiskList": [
-        "LMoqyca"
+        "LMoqyca",
+        "jZxQUkk"
       ]
     }
   ],
@@ -49,37 +60,45 @@
     {
       "id": "je6R94T",
       "UserOffTiskList": [
-        "LMoqyca"
+        "LMoqyca",
+        "jZxQUkk"
       ]
     }
   ],
-  "UserMessage":[
+  "UserMessage": [
     {
-      "id":"2",
-      "Messages":[
+      "id": "2",
+      "Messages": [
         {
-          "Userid":"je6R94T",
-          "Message":"测试发送信息",
-          "Username":"小红"
+          "Userid": "je6R94T",
+          "Message": "测试发送信息",
+          "Username": "小红"
         },
         {
-          "Userid":"je6R94T",
-          "Message":"测试发送信息",
-          "Username":"小红"
+          "Userid": "je6R94T",
+          "Message": "测试发送信息",
+          "Username": "小红"
         },
-          {
-          "Userid":"je6R94T",
-          "Message":"测试发送信息",
-          "Username":"小红"
+        {
+          "Userid": "je6R94T",
+          "Message": "测试发送信息",
+          "Username": "小红"
         }
       ]
     }
   ],
   "Router": [
     {
-      "id": 1,
+      "UserState": "1",
       "Route": {
-        "path": "/Tisk",
+        "path": "/AddRouter",
+        "name": "AddRouter"
+      }
+    },
+    {
+      "UserState": "0",
+      "Route": {
+        "path": "/Tisk11111111",
         "component": "()=> import('../components/TaskList/index.vue')"
       }
     }
