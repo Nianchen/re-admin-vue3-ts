@@ -15,26 +15,23 @@
       <div class="container">
         <div class="form">
           <h2>登录</h2>
-             <div class="inputBox">
-              <input
-                type="text"
-                placeholder="姓名"
-                v-model="User_info.Username"
-              />
-            </div>
-            <div class="inputBox">
-              <input
-                type="password"
-                placeholder="密码"
-                v-model="User_info.Password"
-              />
-            </div>
-            <div class="inputBox">
-              <input type="submit" value="登录" @click="Login_Submit" />
-            </div>
-  
-           
-  
+          <div class="inputBox">
+            <input
+              type="text"
+              placeholder="姓名"
+              v-model="User_info.Username"
+            />
+          </div>
+          <div class="inputBox">
+            <input
+              type="password"
+              placeholder="密码"
+              v-model="User_info.Password"
+            />
+          </div>
+          <div class="inputBox">
+            <input type="submit" value="登录" @click="Login_Submit" />
+          </div>
         </div>
       </div>
     </div>
@@ -42,25 +39,41 @@
 </template>
 <script setup lang="ts">
 import { reactive } from "vue";
-import { useRouter } from "vue-router";
-import { Login } from '@/api/api'
+import { useRoute, useRouter } from "vue-router";
+import { Login } from "@/api/api";
 import { LoginForm } from "@/api/type";
+import { GetRouter } from "@/api/api";
 const router = useRouter();
+const route = useRoute();
 const User_info = reactive<LoginForm>({
-Username: "",
-Password: ""
-})
+  Username: "",
+  Password: "",
+});
 
 const Login_Submit = async () => {
-  if(await Login(User_info)){
-    router.push('/index')
+  if (await Login(User_info)) {
+    const routes = await GetRouter('1')
+    console.log("🚀 ~ file: index.vue:56 ~ constLogin_Submit= ~ routes:", routes)
+    routes.map((item:any)=>{
+        let Routeitem = {
+          path:item.Route.path,
+          name:item.Route.name,
+          component:()=>import(`@/views/${item.Route.name}.vue`)
+        }
+        router.addRoute(Routeitem)
+        console.log(route);
+        
+        // console.log(route);
+        
+    })
+    // router.push('/index')
   }
 };
-window.addEventListener('keydown',(e)=>{
-  if(e.key=='Enter'){
-    Login_Submit()
+window.addEventListener("keydown", (e) => {
+  if (e.key == "Enter") {
+    Login_Submit();
   }
-})
+});
 </script>
 <style scoped>
 /* 使用flex布局，让内容垂直和水平居中 */

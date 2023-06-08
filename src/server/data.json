@@ -89,17 +89,17 @@
   ],
   "Router": [
     {
-      "UserState": "1",
+      "UserState": "0",
       "Route": {
-        "path": "/AddRouter",
-        "name": "AddRouter"
+        "path": "/AboutView",
+        "name": "AboutView"
       }
     },
     {
       "UserState": "0",
       "Route": {
-        "path": "/Tisk11111111",
-        "component": "()=> import('../components/TaskList/index.vue')"
+        "path": "/HomeView",
+        "name": "HomeView"
       }
     }
   ]

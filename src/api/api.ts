@@ -171,3 +171,10 @@ export async function GetMessageList(){
    return result[0].Messages
   }
 }
+
+
+export async function GetRouter(params:string) {
+  const {UserState} = store.state.Userinfo
+  const result = await Myhttp.get('/Router?UserState=' + UserState)
+  return result
+}
