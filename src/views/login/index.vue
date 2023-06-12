@@ -41,12 +41,23 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { LoginForm } from "@/api/type";
+import axios from "axios";
 const router = useRouter();
 const User_info = reactive<LoginForm>({
   Username: "",
   Password: "",
 });
+axios({
+  method:'post',
+  url: '/api/login',
+  data: {
+    username:'123'
+  }
+}).then(res=>{
 
+  
+  console.log(res);
+})
 // const Login_Submit = async () => {
 //     console.log(await Login(User_info));
 //     if(await Login(User_info)){
