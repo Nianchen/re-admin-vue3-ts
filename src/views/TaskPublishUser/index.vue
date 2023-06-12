@@ -9,23 +9,10 @@
       }"
     >
       <div class="logo">
-        <img src="../assets/logo.png" style="height: 30px" />
+        <img src="../../assets/logo.png" style="height: 30px" />
       </div>
-      <a-menu
-        theme="dark"
-        mode="inline"
-        v-model:selectedKeys="selectedKeys"
-
-      >
+      <a-menu theme="dark" mode="inline" v-model:selectedKeys="selectedKeys">
         <a-menu-item key="1">
-          <user-outlined />
-          <span
-            ><router-link to="/DateCenter" style="color: white"
-              >数据中心</router-link
-            ></span
-          >
-        </a-menu-item>
-        <a-menu-item key="2" v-if="UserState === '1'">
           <UsergroupAddOutlined />
           <span
             ><router-link to="/UserManage" style="color: white"
@@ -33,28 +20,28 @@
             ></span
           >
         </a-menu-item>
-        <a-menu-item key="3">
+        <a-menu-item key="2">
           <CalendarOutlined />
           <span
-            ><router-link to="/Tisk" style="color: white"
+            ><router-link to="/TaskManage" style="color: white"
               >任务列表</router-link
             ></span
           >
         </a-menu-item>
-        <a-menu-item key="6" @click="() => (collapsed = !collapsed)">
+        <a-menu-item key="3" @click="() => (collapsed = !collapsed)">
           <menu-unfold-outlined v-if="collapsed" />
           <menu-fold-outlined v-else />
           <span>收起菜单</span>
         </a-menu-item>
-        <a-menu-item key="7" @click="LoginOut">
+        <a-menu-item key="4" @click="LoginOut">
           <ArrowLeftOutlined></ArrowLeftOutlined>
           <span>退出系统</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0;height: 60px;">
-        <Topaside/>
+      <a-layout-header style="background: #fff; padding: 0; height: 60px">
+        <Topaside />
       </a-layout-header>
       <a-layout-content
         :style="{
@@ -72,28 +59,24 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import Topaside from '../components/Topaside/index.vue'
+import Topaside from "../../components/Topaside/index.vue";
 import {
-  UserOutlined,
   UsergroupAddOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   CalendarOutlined,
-  // CommentOutlined,
-  // MailOutlined,
   ArrowLeftOutlined,
 } from "@ant-design/icons-vue";
-import {  ref,computed } from "vue";
-import { useRouter } from "vue-router";
-import store from '@/store'
-    const collapsed = ref(false)
-    const selectedKeys = ref(["0"]);
-    const router = useRouter();
-    const UserState = computed(()=>store.getters.GetUserState)
-    const LoginOut = () => {
-      localStorage.clear("User_info");
-      location.reload()
-    };
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+const collapsed = ref(false);
+const selectedKeys = ref(["1"]);
+const store = useStore()
+console.log("🚀 ~ file: index.vue:75 ~ store:", store)
+const LoginOut = () =>{
+  console.log('Loginout');
+  
+}
 </script>
 <style>
 #components-layout-demo-custom-trigger .trigger {
@@ -108,7 +91,7 @@ import store from '@/store'
   color: #1890ff;
 }
 
-.logo{
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +104,7 @@ import store from '@/store'
 .ant-layout-header {
   height: 45px;
 }
-.ant-layout{
+.ant-layout {
   height: 100%;
 }
 </style>

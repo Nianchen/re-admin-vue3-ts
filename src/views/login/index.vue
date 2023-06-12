@@ -44,31 +44,21 @@ import { Login } from "@/api/api";
 import { LoginForm } from "@/api/type";
 import { GetRouter } from "@/api/api";
 const router = useRouter();
-const route = useRoute();
 const User_info = reactive<LoginForm>({
   Username: "",
   Password: "",
 });
 
-const Login_Submit = async () => {
-  if (await Login(User_info)) {
-    const routes = await GetRouter('1')
-    console.log("🚀 ~ file: index.vue:56 ~ constLogin_Submit= ~ routes:", routes)
-    routes.map((item:any)=>{
-        let Routeitem = {
-          path:item.Route.path,
-          name:item.Route.name,
-          component:()=>import(`@/views/${item.Route.name}.vue`)
-        }
-        router.addRoute(Routeitem)
-        console.log(route);
-        
-        // console.log(route);
-        
-    })
-    // router.push('/index')
-  }
-};
+// const Login_Submit = async () => {
+//     console.log(await Login(User_info));
+//     if(await Login(User_info)){
+//       router.push('/index')
+//     }
+// };
+function Login_Submit() {
+   localStorage.setItem("User_info",JSON.stringify(User_info))
+    router.push('/index')
+}
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
     Login_Submit();

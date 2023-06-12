@@ -2,10 +2,8 @@
   <Suspense>
      <router-view />
   </Suspense> 
- 
 </template>
 <script lang="ts">
-  
 </script>
 
 <style>
