@@ -11,16 +11,17 @@
       <div class="logo">
         <img src="../../assets/logo.png" style="height: 30px" />
       </div>
-      <a-menu theme="dark" mode="inline" v-model:selectedKeys="selectedKeys">
-        <a-menu-item key="1">
+      <a-menu theme="dark" mode="inline"  :inlineIndent="35" v-model:selectedKeys="selectedKeys">
+        <a-menu-item key="1" class="my_menu_item">
           <UsergroupAddOutlined />
           <span
             ><router-link to="/UserManage" style="color: white"
               >用户管理</router-link
             ></span
           >
+
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" class="my_menu_item">
           <CalendarOutlined />
           <span
             ><router-link to="/TaskManage" style="color: white"
@@ -28,12 +29,12 @@
             ></span
           >
         </a-menu-item>
-        <a-menu-item key="3" @click="() => (collapsed = !collapsed)">
+        <a-menu-item key="3" class="my_menu_item" @click="() => (collapsed = !collapsed)">
           <menu-unfold-outlined v-if="collapsed" />
           <menu-fold-outlined v-else />
           <span>收起菜单</span>
         </a-menu-item>
-        <a-menu-item key="4" @click="LoginOut">
+        <a-menu-item key="4" class="my_menu_item" @click="LoginOut">
           <ArrowLeftOutlined></ArrowLeftOutlined>
           <span>退出系统</span>
         </a-menu-item>
@@ -78,7 +79,7 @@ const LoginOut = () =>{
   
 }
 </script>
-<style>
+<style scoped>
 #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
@@ -106,5 +107,8 @@ const LoginOut = () =>{
 }
 .ant-layout {
   height: 100%;
+}
+>>>.my_menu_item{
+  height: 80px;
 }
 </style>

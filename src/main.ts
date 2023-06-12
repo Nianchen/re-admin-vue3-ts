@@ -2,11 +2,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 // import router from "./router";
 // Nianchen测试环境router
-import router from './router/TaskPublich'
+import router from './router/TaskPublish'
 // kergem环境router
 import store from "./store";
-import Antd from "ant-design-vue";
-import "ant-design-vue/dist/antd.css";
 // import * as Echarts from 'echarts'
 // 数据可视化相关
 // import VueMarkdownEditor from '@kangc/v-md-editor';
@@ -18,10 +16,14 @@ import "ant-design-vue/dist/antd.css";
 //   Prism,
 // });
 // 富文本编辑器相关
-
+import { Layout,Menu,Badge,Dropdown,Avatar} from "ant-design-vue";
 const app = createApp(App)
 // 相关插件注册
-app.use(Antd)
+app.use(Layout)
+app.use(Menu)
+app.use(Badge)
+app.use(Dropdown)
+app.use(Avatar)
 app.use(store)
 app.use(router)
 // app.use(VueMarkdownEditor)

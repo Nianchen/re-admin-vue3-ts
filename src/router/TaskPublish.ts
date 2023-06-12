@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Login from '../views/login/index.vue'
 import TaskPublish from '@/views/TaskPublishUser/index.vue'
-import store from "@/store";
+import store from "@/store/TashPublish";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',

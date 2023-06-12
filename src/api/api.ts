@@ -174,6 +174,7 @@ export async function GetMessageList(){
 
 
 export async function GetRouter(params:string) {
+  console.log(params);
   const {UserState} = store.state.Userinfo
   const result = await Myhttp.get('/Router?UserState=' + UserState)
   return result

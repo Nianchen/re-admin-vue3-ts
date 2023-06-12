@@ -1,11 +1,10 @@
 <template>
   <div class="top_aside">
     <div class="text">
-        {{ store.state.Userinfo.UserState == 1 ? '管理员' : "用户"}}
     </div>
     <div class="user">
       <span style="margin-right: 10px">
-    <a-badge :count="MessageCount">
+    <a-badge >
       <a-avatar shape="square">
         <template #icon><UserOutlined /></template>
       </a-avatar>
@@ -30,10 +29,6 @@
 </template>
 <script setup lang="ts">
 import { UserOutlined ,DownOutlined } from "@ant-design/icons-vue";
-import { useStore } from "vuex";
-import { GetMessageList } from "@/api/api";
-const store = useStore()
-const MessageCount = GetMessageList()
 </script>
 <style scoped>
 .top_aside {

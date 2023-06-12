@@ -39,10 +39,8 @@
 </template>
 <script setup lang="ts">
 import { reactive } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { Login } from "@/api/api";
+import { useRouter } from "vue-router";
 import { LoginForm } from "@/api/type";
-import { GetRouter } from "@/api/api";
 const router = useRouter();
 const User_info = reactive<LoginForm>({
   Username: "",
@@ -55,9 +53,10 @@ const User_info = reactive<LoginForm>({
 //       router.push('/index')
 //     }
 // };
+// 本地测试环境登录流程
 function Login_Submit() {
    localStorage.setItem("User_info",JSON.stringify(User_info))
-    router.push('/index')
+    router.push('/UserManage')
 }
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
