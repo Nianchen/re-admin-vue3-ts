@@ -50,9 +50,14 @@
       </a-button>
     </div>
   </div>
-  <a-table rowKey="userId" :columns="columns" :data-source="dataSource"
-  :row-selection="rowSelection"
-  
+  <a-table
+    rowKey="userId"
+    :columns="columns"
+    :data-source="dataSource"
+    :row-selection="rowSelection"
+    :pagination="{
+       pageSize: 7,
+    }"
   >
     <template #emptyText> no data </template>
     <template #headerCell="{ column }">
@@ -74,57 +79,70 @@
       <template v-else-if="column.key === 'action'">
         <div class="action">
           <span>
-        <a-button @click="UpUserData(record)">修改</a-button>
-        <a-modal
-        v-model:visible="Updatavisible"
-        title="更新信息"
-        ok-text="Updata"
-        cancel-text="Cancel"
-        @ok="onUpdata"
-      >
-        <a-form
-          ref="AddUserform"
-          :model="formState"
-          layout="vertical"
-          name="form_in_modal"
-        >
-          <a-form-item
-            name="username"
-            label="账号"
-            :rules="[{ required: true, message: '请输入账号！' }]"
-          >
-            <a-input v-model:value="formState.username" />
-          </a-form-item>
-          <a-form-item
-            name="password"
-            label="密码"
-            :rules="[{ required: true, message: '请输入密码！' }]"
-          >
-            <a-input v-model:value="formState.password" />
-          </a-form-item>
-        </a-form>
-      </a-modal>
-      </span>
-        <span>
-          <a-popconfirm
-            title="请你动动你的小脑瓜想一想能不能删"
-            ok-text="Yes"
-            cancel-text="No"
-            @confirm="UserDel(record.userId)"
-          >
-            <a-button type="primary" danger>删除</a-button></a-popconfirm
-          >
-        </span>
+            <a-button @click="UpUserData(record)">修改</a-button>
+          </span>
+          <span>
+            <a-popconfirm
+              title="请你动动你的小脑瓜想一想能不能删"
+              ok-text="Yes"
+              cancel-text="No"
+              @confirm="UserDel(record.userId)"
+            >
+              <a-button type="primary" danger>删除</a-button></a-popconfirm
+            >
+          </span>
         </div>
-    
       </template>
     </template>
   </a-table>
+  <a-modal
+    v-model:visible="Updatavisible"
+    title="更新信息"
+    ok-text="Updata"
+    cancel-text="Cancel"
+    @ok="onUpdata"
+  >
+    <a-form
+      ref="UpdataUserform"
+      :model="UpdataformState"
+      layout="vertical"
+      name="form_in_modal"
+    >
+      <a-form-item
+        name="username"
+        label="账号"
+        :rules="[{ required: true, message: '请输入账号！' }]"
+      >
+        <a-input v-model:value="UpdataformState.username" />
+      </a-form-item>
+      <a-form-item
+        name="password"
+        label="密码"
+        :rules="[{ required: true, message: '请输入密码！' }]"
+      >
+        <a-input v-model:value="UpdataformState.password" />
+      </a-form-item>
+      <a-form-item
+        name="status"
+        label="修改状态"
+        :rules="[{ required: true, message: '请选择状态' }]"
+      >
+        <a-radio-group
+          v-model:value="UpdataformState.status"
+          :options="[
+            { label: '已登录', value: 2 },
+            { label: '已注销', value: 0 },
+            { label: '已离线', value: 3 },
+          ]"
+        />
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>
 <script lang="ts" setup>
-import { GetUserList ,UpdataUser} from "@/api/TaskPublishapi";
-import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
-import { defineComponent, reactive, ref } from "vue";
+import { GetUserList, UpdataUser } from "@/api/TaskPublishapi";
+import { SmileOutlined } from "@ant-design/icons-vue";
+import { reactive, ref, unref } from "vue";
 const columns = [
   {
     title: "用户id",
@@ -164,7 +182,7 @@ data = await GetUserList();
 //保存原始数据
 const dataSource = ref(data);
 const researchmessage = ref("");
-import { GetUserByUsername, AdminAddUser,AdminDelUser } from "@/api/TaskPublishapi";
+import { AdminAddUser, AdminDelUser } from "@/api/TaskPublishapi";
 import { AdminAddUserType } from "@/api/TaskPublishType";
 import type { FormInstance } from "ant-design-vue";
 const onSearch = async () => {
@@ -193,8 +211,8 @@ const onOk = () => {
   AddUserform.value
     .validateFields()
     .then(async (values) => {
-      const res = await AdminAddUser(values);
-      OnreSet()
+      await AdminAddUser(values);
+      OnreSet();
       visible.value = false;
       AddUserform.value.resetFields();
     })
@@ -204,60 +222,64 @@ const onOk = () => {
 };
 
 const rowSelection = {
-    // 选中项发生变化时的回调;根据这个函数就可以获取用户勾选的哪一个值
-    onChange: (selectedRowKeys: (string | number)[], selectedRows: []) => {
-        console.log(
-            `选中的值: ${selectedRowKeys}`,
-            'selectedRows: ',
-            selectedRows
-        )
-    },
+  // 选中项发生变化时的回调;根据这个函数就可以获取用户勾选的哪一个值
+  onChange: (selectedRowKeys: (string | number)[], selectedRows: []) => {
+    console.log(`选中的值: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
+  },
 
-    // 户手动选择/取消选择某列的回调
-    onSelect: (record: [], selected: boolean, selectedRows: []) => {
-        console.log(
-            '  户手动选择/取消选择某列的回调 ',
-            record,
-            selected,
-            selectedRows
-        )
-    },
+  // 户手动选择/取消选择某列的回调
+  onSelect: (record: [], selected: boolean, selectedRows: []) => {
+    console.log(
+      "  户手动选择/取消选择某列的回调 ",
+      record,
+      selected,
+      selectedRows
+    );
+  },
 
-    // 用户手动选择/取消选择所有列的回调
-    onSelectAll: (selected: boolean, selectedRows: [], changeRows: []) => {
-        console.log(
-            '  用户手动选择/取消选择所有列的回调  ',
-            selected,
-            selectedRows,
-            changeRows
-        )
-    },
-}
-const UserDel = async (userId:string) => {
+  // 用户手动选择/取消选择所有列的回调
+  onSelectAll: (selected: boolean, selectedRows: [], changeRows: []) => {
+    console.log(
+      "  用户手动选择/取消选择所有列的回调  ",
+      selected,
+      selectedRows,
+      changeRows
+    );
+  },
+};
+const UserDel = async (userId: string) => {
   console.log("就i是删" + userId);
-  const res = await AdminDelUser(userId)
-  OnreSet()
+  const res = await AdminDelUser(userId);
+  OnreSet();
 };
 
-const UpUserData = (obj)=>{
-  console.log(obj);
-}
 
+const UpdataTargetid = ref(0)
+const UpUserData = (obj) => {
+  UpdataTargetid.value = obj.userId
+  Updatavisible.value = true;
+};
 
+type AdminUpdataUserType = {
+  username: string;
+  password: string;
+  status: number;
+};
 const Updatavisible = ref(false);
-const UpdataformState = reactive<AdminAddUserType>({
+const UpdataformState = reactive<AdminUpdataUserType>({
   username: "",
   password: "",
+  status: 1,
 });
 const UpdataUserform = ref<FormInstance>();
 const onUpdata = () => {
-  UpdataformState.value
+  UpdataUserform.value
     .validateFields()
     .then(async (values) => {
-      const res = await UpdataUser(values);
+      const res = await UpdataUser(values,unref(UpdataTargetid) );
       OnreSet()
-      visible.value = false;
-      UpdataformState.value.resetFields();
+      Updatavisible.value = false;
+      UpdataUserform.value.resetFields();
     })
     .catch((info) => {
       console.log("Validate Failed:", info);
@@ -265,6 +287,4 @@ const onUpdata = () => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

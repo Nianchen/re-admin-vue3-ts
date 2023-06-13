@@ -1,5 +1,7 @@
 // type RequestType = 'upload' | ''
 
+import { AdminAddUser } from "./TaskPublishapi"
+
 type UserLoginForm = {
     username:string,
     password:string,
@@ -7,11 +9,17 @@ type UserLoginForm = {
 }
 
 
-type AdminAddUserType = {
+interface AdminAddUserType  {
     username:string,
     password:string,
 }
+
+interface UpdataUserType extends AdminAddUserType{
+    status:number
+    userId:number
+}
 export {
     UserLoginForm,
-    AdminAddUserType
+    AdminAddUserType,
+    UpdataUserType
 }

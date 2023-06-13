@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig,InternalAxiosRequestConfig } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 import { useRouter } from 'vue-router'
 // const request: AxiosInstance = axios.create({
 //     baseURL: "http://localhost:5555",
@@ -26,16 +26,17 @@ axios.interceptors.request.use(
         return config;
     },
     (error: any) => {
-        router.push({name:"Login"})
+        router.push({ name: "Login" })
+        localStorage.clear()
         return Promise.reject(error);
     }
 );
 request.interceptors.response.use(
     res => {
-        const {status,data,statusText} = res
-        if(status == 200)
+        const { status, data, statusText } = res
+        if (status == 200)
             return data
-    },err =>{
+    }, err => {
         return Promise.reject(err)
     }
 )
@@ -53,5 +54,8 @@ const Myhttp = {
     patch<T = any> (url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
         return request.patch(url, data, config)
     },
+    put<T = any> (url: string, data: any, config?: AxiosRequestConfig): Promise<T> {
+        return request.put(url, data, config)
+    }
 }
 export default Myhttp

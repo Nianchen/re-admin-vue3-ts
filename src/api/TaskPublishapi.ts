@@ -53,7 +53,11 @@ export async function AdminDelUser(userId:string){
     return res.data
 }
 
-export async function UpdataUser(Userinfo:object){
+
+import { UpdataUserType } from "./TaskPublishType";
+export async function UpdataUser(Userinfo:UpdataUserType,UserId:number){
     console.log(Userinfo);
-    
+    Userinfo.userId = UserId
+    const res = await Myhttp.put('/admin/user',Userinfo)
+    console.log("🚀 ~ file: TaskPublishapi.ts:59 ~ UpdataUser ~ res:", res)
 }
