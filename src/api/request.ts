@@ -1,10 +1,11 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig,InternalAxiosRequestConfig } from 'axios'
+import { useRouter } from 'vue-router'
 // const request: AxiosInstance = axios.create({
 //     baseURL: "http://localhost:5555",
 //     timeout: 8000
 // })
-
+const router = useRouter()
 
 const request: AxiosInstance = axios.create({
     baseURL: "/api",
@@ -25,6 +26,7 @@ axios.interceptors.request.use(
         return config;
     },
     (error: any) => {
+        router.push({name:"Login"})
         return Promise.reject(error);
     }
 );

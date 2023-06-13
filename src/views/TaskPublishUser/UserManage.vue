@@ -77,8 +77,8 @@
         <a-button @click="UpUserData(record)">修改</a-button>
         <a-modal
         v-model:visible="Updatavisible"
-        title="创建一个新用户"
-        ok-text="Create"
+        title="更新信息"
+        ok-text="Updata"
         cancel-text="Cancel"
         @ok="onUpdata"
       >
@@ -122,7 +122,7 @@
   </a-table>
 </template>
 <script lang="ts" setup>
-import { GetUserList ,UpdataAddUser} from "@/api/TaskPublishapi";
+import { GetUserList ,UpdataUser} from "@/api/TaskPublishapi";
 import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
 import { defineComponent, reactive, ref } from "vue";
 const columns = [
@@ -254,7 +254,7 @@ const onUpdata = () => {
   UpdataformState.value
     .validateFields()
     .then(async (values) => {
-      const res = await UpdataAddUser(values);
+      const res = await UpdataUser(values);
       OnreSet()
       visible.value = false;
       UpdataformState.value.resetFields();

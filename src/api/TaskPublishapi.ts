@@ -52,3 +52,8 @@ export async function AdminDelUser(userId:string){
     const res = await Myhttp.delete('/admin/user/' + userId)
     return res.data
 }
+
+export async function UpdataUser(Userinfo:object){
+    console.log(Userinfo);
+    
+}

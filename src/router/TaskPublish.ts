@@ -9,6 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/Login",
+    name:"Login",
     component: Login,
   },
   {
@@ -36,6 +37,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   /* eslint-disable */
+  console.log(111111);
+  
   if (localStorage.getItem('User_info')) {
     store.commit("SetUserinfo", JSON.parse(localStorage.getItem('User_info')!))
     //先做静态权限管理
