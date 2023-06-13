@@ -68,7 +68,7 @@ import {
   CalendarOutlined,
   ArrowLeftOutlined,
 } from "@ant-design/icons-vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 const collapsed = ref(false);
 const selectedKeys = ref(["1"]);
@@ -108,7 +108,10 @@ const LoginOut = () =>{
 .ant-layout {
   height: 100%;
 }
->>>.my_menu_item{
+/* >>>.my_menu_item{
   height: 80px;
-}
+} */
+:deep(.my_menu_item{
+  height: 75px;
+})
 </style>

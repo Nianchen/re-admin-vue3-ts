@@ -7,10 +7,10 @@ module.exports = defineConfig({
     proxy:{
       '/api':{
         target:process.env.VUE_APP_SERVER_URL,
+        changeOrigin:true,
         pathRewrite:{
           '^/api':" "
         },
-        changeOrigin:true
       }
     }
   }

@@ -5,7 +5,6 @@ import store from "@/store/TashPublish";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    // redirect重定向
     redirect: '/Login',
   },
   {
@@ -36,6 +35,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  /* eslint-disable */
   if (localStorage.getItem('User_info')) {
     store.commit("SetUserinfo", JSON.parse(localStorage.getItem('User_info')!))
     //先做静态权限管理

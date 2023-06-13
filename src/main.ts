@@ -16,7 +16,7 @@ import store from "./store";
 //   Prism,
 // });
 // 富文本编辑器相关
-import { Layout,Menu,Badge,Dropdown,Avatar} from "ant-design-vue";
+import { Layout,Menu,Badge,Dropdown,Avatar,Input,Table,Popconfirm,Tag,Divider} from "ant-design-vue";
 const app = createApp(App)
 // 相关插件注册
 app.use(Layout)
@@ -24,6 +24,11 @@ app.use(Menu)
 app.use(Badge)
 app.use(Dropdown)
 app.use(Avatar)
+app.use(Input)
+app.use(Table)
+app.use(Popconfirm)
+app.use(Tag)
+app.use(Divider)
 app.use(store)
 app.use(router)
 // app.use(VueMarkdownEditor)

@@ -15,23 +15,25 @@
       <div class="container">
         <div class="form">
           <h2>登录</h2>
+
           <div class="inputBox">
             <input
               type="text"
               placeholder="姓名"
-              v-model="User_info.Username"
+              v-model="UserLoginInfo.username"
             />
           </div>
           <div class="inputBox">
             <input
               type="password"
               placeholder="密码"
-              v-model="User_info.Password"
+              v-model="UserLoginInfo.password"
             />
           </div>
           <div class="inputBox">
             <input type="submit" value="登录" @click="Login_Submit" />
           </div>
+          >
         </div>
       </div>
     </div>
@@ -40,34 +42,34 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import { LoginForm } from "@/api/type";
-import axios from "axios";
+import { UserLoginForm } from "@/api/TaskPublishType";
 const router = useRouter();
-const User_info = reactive<LoginForm>({
-  Username: "",
-  Password: "",
+const UserLoginInfo = reactive<UserLoginForm>({
+  username: "",
+  password: "",
+  userType: 0,
 });
-axios({
-  method:'post',
-  url: '/api/login',
-  data: {
-    username:'123'
-  }
-}).then(res=>{
-
-  
-  console.log(res);
-})
+// 本地测试环境登录流程
 // const Login_Submit = async () => {
 //     console.log(await Login(User_info));
 //     if(await Login(User_info)){
 //       router.push('/index')
 //     }
 // };
-// 本地测试环境登录流程
-function Login_Submit() {
-   localStorage.setItem("User_info",JSON.stringify(User_info))
-    router.push('/UserManage')
+
+import { Login } from "@/api/TaskPublishapi";
+async function Login_Submit() {
+  localStorage.setItem("User_info", JSON.stringify(UserLoginInfo));
+  const data = {
+    username: "123",
+    password: "123",
+    userType: 1,
+  };
+  const res = await Login(data).catch(err=>{
+    console.log(err);
+  });
+  console.log("🚀 ~ file: index.vue:62 ~ Login_Submit ~ res:", res);
+  router.push("/UserManage");
 }
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
