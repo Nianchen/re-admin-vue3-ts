@@ -31,6 +31,12 @@
             />
           </div>
           <div class="inputBox">
+            <a-radio-group v-model:value="UserLoginInfo.userType">
+              <a-radio :value="1">管理员</a-radio>
+              <a-radio :value="2">用户</a-radio>
+            </a-radio-group>
+          </div>
+          <div class="inputBox">
             <input type="submit" value="登录" @click="Login_Submit" />
           </div>
           >
@@ -47,7 +53,7 @@ const router = useRouter();
 const UserLoginInfo = reactive<UserLoginForm>({
   username: "",
   password: "",
-  userType: 0,
+  userType: 1,
 });
 // 本地测试环境登录流程
 // const Login_Submit = async () => {
@@ -60,16 +66,10 @@ const UserLoginInfo = reactive<UserLoginForm>({
 import { Login } from "@/api/TaskPublishapi";
 async function Login_Submit() {
   localStorage.setItem("User_info", JSON.stringify(UserLoginInfo));
-  const data = {
-    username: "123",
-    password: "123",
-    userType: 1,
-  };
-  const res = await Login(data).catch(err=>{
-    console.log(err);
-  });
-  console.log("🚀 ~ file: index.vue:62 ~ Login_Submit ~ res:", res);
-  router.push("/UserManage");
+  const res = await Login(UserLoginInfo)
+  if(res){
+      router.push("/UserManage");
+  }
 }
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
@@ -79,7 +79,6 @@ window.addEventListener("keydown", (e) => {
 </script>
 <style scoped>
 /* 使用flex布局，让内容垂直和水平居中 */
-
 section {
   /* 相对定位 */
   position: relative;

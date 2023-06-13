@@ -4,7 +4,7 @@ import App from "./App.vue";
 // Nianchen测试环境router
 import router from './router/TaskPublish'
 // kergem环境router
-import store from "./store";
+import store from "./store/TashPublish";
 // import * as Echarts from 'echarts'
 // 数据可视化相关
 // import VueMarkdownEditor from '@kangc/v-md-editor';
@@ -16,7 +16,7 @@ import store from "./store";
 //   Prism,
 // });
 // 富文本编辑器相关
-import { Layout,Menu,Badge,Dropdown,Avatar,Input,Table,Popconfirm,Tag,Divider} from "ant-design-vue";
+import { Layout,Menu,Badge,Dropdown,Avatar,Input,Table,Popconfirm,Tag,Divider,Radio,Button} from "ant-design-vue";
 const app = createApp(App)
 // 相关插件注册
 app.use(Layout)
@@ -29,6 +29,8 @@ app.use(Table)
 app.use(Popconfirm)
 app.use(Tag)
 app.use(Divider)
+app.use(Radio)
+app.use(Button)
 app.use(store)
 app.use(router)
 // app.use(VueMarkdownEditor)

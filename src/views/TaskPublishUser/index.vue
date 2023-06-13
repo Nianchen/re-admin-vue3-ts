@@ -34,7 +34,7 @@
           <menu-fold-outlined v-else />
           <span>收起菜单</span>
         </a-menu-item>
-        <a-menu-item key="4" class="my_menu_item" @click="LoginOut">
+        <a-menu-item key="4" class="my_menu_item" @click="LogOut">
           <ArrowLeftOutlined></ArrowLeftOutlined>
           <span>退出系统</span>
         </a-menu-item>
@@ -69,14 +69,16 @@ import {
   ArrowLeftOutlined,
 } from "@ant-design/icons-vue";
 import { ref } from "vue";
-import { useStore } from "vuex";
+import { LoginOut } from "@/api/TaskPublishapi";
+import { useRouter } from "vue-router";
 const collapsed = ref(false);
 const selectedKeys = ref(["1"]);
-const store = useStore()
-console.log("🚀 ~ file: index.vue:75 ~ store:", store)
-const LoginOut = () =>{
-  console.log('Loginout');
-  
+const router = useRouter()
+const LogOut = async ()=>{
+  const res = await LoginOut()
+  if(res){
+    router.push('/Login')
+  }
 }
 </script>
 <style scoped>

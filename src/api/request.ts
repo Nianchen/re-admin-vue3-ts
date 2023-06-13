@@ -1,6 +1,5 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig,InternalAxiosRequestConfig } from 'axios'
-
 // const request: AxiosInstance = axios.create({
 //     baseURL: "http://localhost:5555",
 //     timeout: 8000
@@ -31,7 +30,11 @@ axios.interceptors.request.use(
 );
 request.interceptors.response.use(
     res => {
-        return res.data
+        const {status,data,statusText} = res
+        if(status == 200)
+            return data
+    },err =>{
+        return Promise.reject(err)
     }
 )
 

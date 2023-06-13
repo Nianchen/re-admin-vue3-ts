@@ -2,14 +2,13 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     Userinfo:{
-      UserState:"",
-      id:""
+      UserId:"",
+      username:"",
+      userType:1
     }
   },
   getters: {
-    GetUserState:state=>{
-      return state.Userinfo.UserState
-    }
+  
   },
   mutations: {
     SetUserinfo(state,Userinfo){
