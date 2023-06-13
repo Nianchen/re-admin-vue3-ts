@@ -1,7 +1,7 @@
 import { useStore } from "vuex";
 import Myhttp from "./request";
 
-import {UserLoginForm} from './TaskPublishType'
+import { UserLoginForm} from './TaskPublishType'
 import {message} from 'ant-design-vue'
 const store = useStore()
 
@@ -39,4 +39,16 @@ export async function GetUserByUsername(Username:string){
         username:Username
     })
     return res
+}
+
+import {AdminAddUserType} from './TaskPublishType'
+export async function AdminAddUser(AddUserInfo:AdminAddUserType){
+    const res = await Myhttp.post('/admin/user',AddUserInfo)
+    console.log(res);
+}
+
+
+export async function AdminDelUser(userId:string){
+    const res = await Myhttp.delete('/admin/user/' + userId)
+    return res.data
 }

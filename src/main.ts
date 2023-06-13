@@ -16,7 +16,8 @@ import store from "./store/TashPublish";
 //   Prism,
 // });
 // 富文本编辑器相关
-import { Layout,Menu,Badge,Dropdown,Avatar,Input,Table,Popconfirm,Tag,Divider,Radio,Button} from "ant-design-vue";
+import { Layout, Menu, Badge, Dropdown, Avatar, Input, Table, Popconfirm, Tag, Divider, Radio, Button, Form, Modal } from "ant-design-vue";
+
 const app = createApp(App)
 // 相关插件注册
 app.use(Layout)
@@ -31,6 +32,8 @@ app.use(Tag)
 app.use(Divider)
 app.use(Radio)
 app.use(Button)
+app.use(Form)
+app.use(Modal)
 app.use(store)
 app.use(router)
 // app.use(VueMarkdownEditor)

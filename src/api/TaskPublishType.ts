@@ -6,6 +6,12 @@ type UserLoginForm = {
     userType:number
 }
 
+
+type AdminAddUserType = {
+    username:string,
+    password:string,
+}
 export {
-    UserLoginForm
+    UserLoginForm,
+    AdminAddUserType
 }
