@@ -7,6 +7,7 @@ import { message } from 'ant-design-vue'
 //     timeout: 8000
 // })
 const router = useRouter()
+console.log("🚀 ~ file: request.ts:10 ~ router:", router)
 
 const request: AxiosInstance = axios.create({
     baseURL: "/api",
@@ -28,14 +29,14 @@ axios.interceptors.request.use(
         console.log("🚀 ~ file: request.ts:28 ~ config:", config)
         return config;
     },
-    (error: any) => {
+    (error) => {
         localStorage.clear()
         return Promise.reject(error);
     }
 );
 request.interceptors.response.use(
     res => {
-        const { status, data, statusText } = res
+        const { status, data } = res
         if (status == 200)
             return data
     }, err => {

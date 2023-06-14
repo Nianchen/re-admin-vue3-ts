@@ -4,6 +4,7 @@ import Myhttp from "./request";
 import { UserLoginForm} from './TaskPublishType'
 import {message} from 'ant-design-vue'
 const store = useStore()
+console.log(store);
 
 export async function Login(data:UserLoginForm) {
     const res =  await Myhttp.post('/login',data)
@@ -55,9 +56,7 @@ export async function AdminDelUser(userId:string){
 
 
 import { UpdataUserType } from "./TaskPublishType";
-export async function UpdataUser(Userinfo:UpdataUserType,UserId:number){
-    console.log(Userinfo);
-    Userinfo.userId = UserId
+export async function UpdataUser(Userinfo:UpdataUserType){
     const res = await Myhttp.put('/admin/user',Userinfo)
-    console.log("🚀 ~ file: TaskPublishapi.ts:59 ~ UpdataUser ~ res:", res)
+    return res
 }

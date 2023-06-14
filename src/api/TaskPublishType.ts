@@ -1,25 +1,34 @@
-// type RequestType = 'upload' | ''
 
-import { AdminAddUser } from "./TaskPublishapi"
 
-type UserLoginForm = {
+export type UserLoginForm = {
     username:string,
     password:string,
     userType:number
 }
 
 
-interface AdminAddUserType  {
+export interface AdminAddUserType  {
     username:string,
     password:string,
 }
 
-interface UpdataUserType extends AdminAddUserType{
+export interface UpdataUserType extends AdminAddUserType{
     status:number
     userId:number
 }
-export {
-    UserLoginForm,
-    AdminAddUserType,
-    UpdataUserType
+
+
+export type UserListItem = {
+    userId: string;
+    username: string;
+    password: string;
+    status: number;
+}
+
+
+export type AdminUpdataUserType = {
+    username: string;
+    password: string;
+    status: number;
+    userId: number;
 }

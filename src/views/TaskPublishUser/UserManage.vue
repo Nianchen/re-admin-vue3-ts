@@ -56,10 +56,10 @@
     :data-source="dataSource"
     :row-selection="rowSelection"
     :pagination="{
-       pageSize: 7,
+      pageSize: 7,
     }"
   >
-    <template #emptyText> no data </template>
+    <template #emptyText> 暂无数据 </template>
     <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
         <span>
@@ -108,25 +108,13 @@
       layout="vertical"
       name="form_in_modal"
     >
-      <a-form-item
-        name="username"
-        label="账号"
-        :rules="[{ required: true, message: '请输入账号！' }]"
-      >
+      <a-form-item name="username" label="账号">
         <a-input v-model:value="UpdataformState.username" />
       </a-form-item>
-      <a-form-item
-        name="password"
-        label="密码"
-        :rules="[{ required: true, message: '请输入密码！' }]"
-      >
+      <a-form-item name="password" label="密码">
         <a-input v-model:value="UpdataformState.password" />
       </a-form-item>
-      <a-form-item
-        name="status"
-        label="修改状态"
-        :rules="[{ required: true, message: '请选择状态' }]"
-      >
+      <a-form-item name="status" label="修改状态">
         <a-radio-group
           v-model:value="UpdataformState.status"
           :options="[
@@ -142,7 +130,9 @@
 <script lang="ts" setup>
 import { GetUserList, UpdataUser } from "@/api/TaskPublishapi";
 import { SmileOutlined } from "@ant-design/icons-vue";
-import { reactive, ref, unref } from "vue";
+import { reactive, ref } from "vue";
+import { AdminAddUser, AdminDelUser } from "@/api/TaskPublishapi";
+import { AdminAddUserType, AdminUpdataUserType, UserListItem } from "@/api/TaskPublishType";
 const columns = [
   {
     title: "用户id",
@@ -170,57 +160,6 @@ const columns = [
     key: "action",
   },
 ];
-
-type User = {
-  userId: string;
-  username: string;
-  password: string;
-  status: number;
-};
-let data: User[] = [];
-data = await GetUserList();
-//保存原始数据
-const dataSource = ref(data);
-const researchmessage = ref("");
-import { AdminAddUser, AdminDelUser } from "@/api/TaskPublishapi";
-import { AdminAddUserType } from "@/api/TaskPublishType";
-import type { FormInstance } from "ant-design-vue";
-const onSearch = async () => {
-  console.log(123);
-  if (researchmessage.value == "") {
-    return;
-  } else {
-    dataSource.value = data.filter(
-      (item) => item.username == researchmessage.value
-    );
-  }
-  // const res = await GetUserByUsername(researchmessage.value)
-  // console.log(res);
-};
-const OnreSet = async () => {
-  dataSource.value = await GetUserList();
-};
-
-const visible = ref(false);
-const formState = reactive<AdminAddUserType>({
-  username: "",
-  password: "",
-});
-const AddUserform = ref<FormInstance>();
-const onOk = () => {
-  AddUserform.value
-    .validateFields()
-    .then(async (values) => {
-      await AdminAddUser(values);
-      OnreSet();
-      visible.value = false;
-      AddUserform.value.resetFields();
-    })
-    .catch((info) => {
-      console.log("Validate Failed:", info);
-    });
-};
-
 const rowSelection = {
   // 选中项发生变化时的回调;根据这个函数就可以获取用户勾选的哪一个值
   onChange: (selectedRowKeys: (string | number)[], selectedRows: []) => {
@@ -247,41 +186,72 @@ const rowSelection = {
     );
   },
 };
+let data: UserListItem[] = [];
+data = await GetUserList();
+//保存原始数据
+const dataSource = ref(data);
+const researchmessage = ref("");
+const onSearch = async () => {
+  console.log(123);
+  if (researchmessage.value == "") {
+    return;
+  } else {
+    dataSource.value = data.filter(
+      (item) => item.username == researchmessage.value
+    );
+  }
+};
+const OnreSet = async () => {
+  dataSource.value = await GetUserList();
+};
+const visible = ref(false);
+const formState = reactive<AdminAddUserType>({
+  username: "",
+  password: "",
+});
+const AddUserform = ref<any>();
+const onOk = () => {
+  AddUserform.value
+    .validateFields()
+    .then(async (values:any) => {
+      await AdminAddUser(values);
+      OnreSet();
+      visible.value = false;
+      AddUserform.value.resetFields();
+    })
+    .catch((info:any) => {
+      console.log("Validate Failed:", info);
+    });
+};
 const UserDel = async (userId: string) => {
-  console.log("就i是删" + userId);
   const res = await AdminDelUser(userId);
   OnreSet();
 };
-
-
-const UpdataTargetid = ref(0)
-const UpUserData = (obj) => {
-  UpdataTargetid.value = obj.userId
+const UpUserData = (obj:UserListItem) => {
+  UpdataformState.userId = Number(obj.userId) 
+  UpdataformState.username = obj.username
+  UpdataformState.password = obj.password
+  UpdataformState.status = obj.status
   Updatavisible.value = true;
-};
-
-type AdminUpdataUserType = {
-  username: string;
-  password: string;
-  status: number;
 };
 const Updatavisible = ref(false);
 const UpdataformState = reactive<AdminUpdataUserType>({
   username: "",
   password: "",
   status: 1,
+  userId: 0,
 });
-const UpdataUserform = ref<FormInstance>();
+const UpdataUserform = ref<any>();
 const onUpdata = () => {
   UpdataUserform.value
     .validateFields()
-    .then(async (values) => {
-      const res = await UpdataUser(values,unref(UpdataTargetid) );
-      OnreSet()
+    .then(async (values:any) => {
+      const res = await UpdataUser(UpdataformState);
+      OnreSet();
       Updatavisible.value = false;
       UpdataUserform.value.resetFields();
     })
-    .catch((info) => {
+    .catch((info:any) => {
       console.log("Validate Failed:", info);
     });
 };
