@@ -2,7 +2,7 @@
   <a-table :columns="columns" :data-source="data" :pagination="false">
     <!-- 一般表头不需要什么变化 -->
     <template #bodyCell="{ column, record }">
-      <template v-if="column.isslot">
+      <template v-if="column.slot">
         <slot :name="column.key" :row="record"></slot>
       </template>
 

@@ -36,6 +36,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   /* eslint-disable */
+  localStorage.setItem("User_info",'123')
   if (localStorage.getItem('User_info')) {
     //先做静态权限管理
     next()

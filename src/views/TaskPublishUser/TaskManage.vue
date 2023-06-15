@@ -12,16 +12,30 @@
       </div>
     </template>
   </MyTable>
+
+  <MyModal
+    :visibleshow="ModalShow"
+    :onOk="
+      () => {
+        ModalShow = false;
+      }
+    "
+  >111111111
+    <template #ModalContent>
+     
+      <div>测试插槽</div>
+    </template>
+  </MyModal>
 </template>
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import MyTable from "./components/MyTable/index.vue";
-
+import MyModal from "./components/MyModal/index.vue";
 const TaskListColumns = [
   {
     title: "姓名",
     key: "name",
-    isslot: true,
+    slot: true,
   },
   {
     title: "年龄",
@@ -30,7 +44,7 @@ const TaskListColumns = [
   {
     title: "操作",
     key: "action",
-    isslot: true,
+    slot: true,
   },
 ];
 
@@ -38,7 +52,7 @@ const TaskListData = reactive([
   {
     name: "123",
     age: 18,
-    id:1
+    id: 1,
   },
 ]);
 //需要绑定成响应式的
@@ -46,8 +60,15 @@ const addData = () => {
   TaskListData.push({
     name: "123",
     age: 18,
-    id:2
+    id: 2,
   });
+  ModalShow.value = true;
 };
+
+const ModalShow = ref(false);
+const ModalTarget = reactive({
+  title: "姓名",
+  key: "name",
+});
 </script>
 <style scoped></style>
