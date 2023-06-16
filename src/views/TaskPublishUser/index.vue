@@ -25,16 +25,24 @@
           <CalendarOutlined />
           <span
             ><router-link to="/TaskManage" style="color: white"
-              >任务列表</router-link
+              >任务管理</router-link
             ></span
           >
         </a-menu-item>
-        <a-menu-item key="3" class="my_menu_item" @click="() => (collapsed = !collapsed)">
+        <a-menu-item key="3" class="my_menu_item">
+          <CalendarOutlined />
+          <span
+            ><router-link to="/CommentManage" style="color: white"
+              >评论管理</router-link
+            ></span
+          >
+        </a-menu-item>
+        <a-menu-item key="4" class="my_menu_item" @click="() => (collapsed = !collapsed)">
           <menu-unfold-outlined v-if="collapsed" />
           <menu-fold-outlined v-else />
           <span>收起菜单</span>
         </a-menu-item>
-        <a-menu-item key="4" class="my_menu_item" @click="LogOut">
+        <a-menu-item key="5" class="my_menu_item" @click="LogOut">
           <ArrowLeftOutlined></ArrowLeftOutlined>
           <span>退出系统</span>
         </a-menu-item>

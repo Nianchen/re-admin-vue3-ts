@@ -186,17 +186,15 @@ const rowSelection = {
     );
   },
 };
-let data: UserListItem[] = [];
-data = await GetUserList();
 //保存原始数据
-const dataSource = ref(data);
+const dataSource = ref<UserListItem[]>([]);
 const researchmessage = ref("");
 const onSearch = async () => {
   console.log(123);
   if (researchmessage.value == "") {
     return;
   } else {
-    dataSource.value = data.filter(
+    dataSource.value = dataSource.value.filter(
       (item) => item.username == researchmessage.value
     );
   }
@@ -204,6 +202,7 @@ const onSearch = async () => {
 const OnreSet = async () => {
   dataSource.value = await GetUserList();
 };
+OnreSet()
 const visible = ref(false);
 const formState = reactive<AdminAddUserType>({
   username: "",

@@ -22,6 +22,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/TaskManage",
         component: () => import('@/views/TaskPublishUser/TaskManage.vue')
+      },
+      {
+        path:"/CommentManage",
+        component:() => import("@/views/TaskPublishUser/CommentManage.vue")
       }
     ]
   },

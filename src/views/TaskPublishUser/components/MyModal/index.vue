@@ -6,6 +6,7 @@
     cancel-text="Cancel"
     @ok="onOk"
     @cancel="onCancel"
+    
   >
     <slot name="ModalContent"> </slot>
   </a-modal>

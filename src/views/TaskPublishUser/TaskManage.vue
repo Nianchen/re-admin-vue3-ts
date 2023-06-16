@@ -1,18 +1,28 @@
 <template>
+  <a-button type="primary">添加新用户</a-button>
   <MyTable :columns="TaskListColumns" :data="TaskListData">
-    <template #name="{ row }">
+    <template #taskId="{ row }">
       <a>
-        {{ row.name }}
+        {{ row.taskId }}
       </a>
     </template>
-    <template #action="{ row }">
-      <div>
+    <template #receiveUserid="{row}">
+        <span v-if="row.receiveUserid">
+            {{ row.receiveUserid }}
+        </span>
+        <span v-else>
+          暂无人接受任务
+        </span>
+    </template>
+    <template #action>
+      <div class="TableAction">
         <!-- 这里的row对应每一条数据 -->
-        <button @click="addData" :key="row.id">增加数据</button>
+        <a-button type="primary">查看任务详情</a-button>
+        <a-button type="primary">编辑任务</a-button>
+        <a-button type="primary">删除任务</a-button>
       </div>
     </template>
   </MyTable>
-
   <MyModal
     :visibleshow="ModalShow"
     :onOk="
@@ -20,9 +30,11 @@
         ModalShow = false;
       }
     "
-  >111111111
-    <template #ModalContent>
-     
+    :onCancel="()=>{
+        ModalShow = false
+    }"
+  >
+    <template #ModalContent>  
       <div>测试插槽</div>
     </template>
   </MyModal>
@@ -31,28 +43,60 @@
 import { reactive, ref } from "vue";
 import MyTable from "./components/MyTable/index.vue";
 import MyModal from "./components/MyModal/index.vue";
+type TaskItem = {
+  taskId:number
+  taskName:string
+  taskMessage:string
+  sendUserId:number
+  sendTime:string
+  overTime:string
+  status:number
+  receiveUserId?:number
+}
 const TaskListColumns = [
   {
-    title: "姓名",
-    key: "name",
+    title: "任务ID",
+    key: "taskId",
     slot: true,
+    width: 100
   },
   {
-    title: "年龄",
-    key: "age",
+    title: "任务名",
+    key: "taskName",
+    width:300
   },
   {
-    title: "操作",
-    key: "action",
+    title: "任务接受者",
+    key: "receiveUserid",
     slot: true,
+    width:300
   },
+  {
+    title: "开始时间",
+    key: "taskName",
+    width:150
+  },
+  {
+    title: "结束时间",
+    key: "taskName",
+    width:150
+  },{
+    title:'操作',
+    key:'action',
+    slot:true,
+    width:120
+  }
 ];
 
-const TaskListData = reactive([
+const TaskListData = reactive<TaskItem[]>([
   {
-    name: "123",
-    age: 18,
-    id: 1,
+    taskId:1,
+    taskMessage:'1111',
+    taskName:"测试任务",
+    sendUserId:1,
+    sendTime:'2023-06-12',
+    overTime:'2023-1-1',
+    status:1
   },
 ]);
 //需要绑定成响应式的
@@ -66,9 +110,11 @@ const addData = () => {
 };
 
 const ModalShow = ref(false);
-const ModalTarget = reactive({
-  title: "姓名",
-  key: "name",
-});
 </script>
-<style scoped></style>
+<style scoped>
+.TableAction{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+</style>

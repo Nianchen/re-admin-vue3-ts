@@ -32,7 +32,11 @@ export async function LoginOut(){
 
 export async function GetUserList(){
     const res = await Myhttp.get('/admin/userList')
-    return res.data
+    if(res){
+        return res.data
+    }else{
+        return []
+    }
 }
 
 export async function GetUserByUsername(Username:string){
