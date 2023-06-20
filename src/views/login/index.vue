@@ -57,14 +57,12 @@ const UserLoginInfo = reactive<UserLoginForm>({
 });
 import { Login } from "@/api/TaskPublishapi";
 async function Login_Submit() {
-  // const res = await Login(UserLoginInfo)
-  // if(res){
-  //     localStorage.setItem("Usertoken", JSON.stringify(res));
-  //     router.push("/UserManage");
-  // }else{
-  //   router.push('/')
-  // }
-    router.push('/UserManage');
+  const res = await Login(UserLoginInfo)
+  if(res){
+      router.push("/UserManage");
+  }else{
+    router.push('/')
+  }
 }
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {

@@ -1,5 +1,4 @@
 <template>
-  <!-- <div></div> -->
   <Mytable></Mytable>
 </template>
 <script setup lang="ts">

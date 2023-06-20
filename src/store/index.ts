@@ -1,19 +1,14 @@
 import { createStore } from "vuex";
 export default createStore({
   state: {
-    Userinfo:{
-      UserState:"",
-      id:""
-    }
+    Loading:false
   },
   getters: {
-    GetUserState:state=>{
-      return state.Userinfo.UserState
-    }
+    
   },
   mutations: {
-    SetUserinfo(state,Userinfo){
-      state.Userinfo = Userinfo
+    SetAllLoading(state,status){
+      state.Loading = status
     }
   },
   actions: {},

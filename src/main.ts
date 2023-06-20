@@ -4,7 +4,7 @@ import App from "./App.vue";
 // Nianchen测试环境router
 import router from './router/TaskPublish'
 // kergem环境router
-import store from "./store/TashPublish";
+import store from "./store";
 // import * as Echarts from 'echarts'
 // 数据可视化相关
 // import VueMarkdownEditor from '@kangc/v-md-editor';

@@ -1,6 +1,6 @@
 <template>
-  <a-button type="primary">添加任务</a-button>
-  <MyTable :columns="TaskListColumns" :data="TaskListData">
+  <a-button type="primary" @click="addData">添加任务</a-button>
+  <MyTable :columns="TaskListColumns" :data="TaskListData" :config="TableConfig">
     <template #taskId="{ row }">
       <a>
         {{ row.taskId }}
@@ -17,21 +17,21 @@
     <template #action>
       <div class="TableAction">
         <!-- 这里的row对应每一条数据 -->
-        <a-button type="primary">查看任务详情</a-button>
+        <a-button type="primary" @click="TaskDetailModalShow = true">查看任务详情</a-button>
         <a-button type="primary">编辑任务</a-button>
         <a-button type="primary">删除任务</a-button>
       </div>
     </template>
   </MyTable>
   <MyModal
-    :visibleshow="ModalShow"
+    :visibleshow="TaskDetailModalShow"
     :onOk="
       () => {
-        ModalShow = false;
+        TaskDetailModalShow = false;
       }
     "
     :onCancel="()=>{
-        ModalShow = false
+        TaskDetailModalShow = false
     }"
   >
     <template #ModalContent>  
@@ -45,7 +45,7 @@ import MyTable from "./components/MyTable/index.vue";
 import MyModal from "./components/MyModal/index.vue";
 import { AdminGetTaskList } from "@/api/TaskPublishapi";
 import { TaskItem } from "@/api/TaskPublishType";
-const TaskListColumns = [
+const TaskListColumns = reactive([
   {
     title: "任务ID",
     key: "taskId",
@@ -78,8 +78,10 @@ const TaskListColumns = [
     slot:true,
     width:120
   }
-];
-
+]);
+const TableConfig = {
+  loading:true,
+}
 const TaskListData = reactive<TaskItem[]>([]);
 const initDataList = async () =>{
   const TaskList = await AdminGetTaskList()
@@ -89,10 +91,16 @@ const initDataList = async () =>{
 initDataList()
 //需要绑定成响应式的
 const addData = () => {
-  ModalShow.value = true;
+  TaskListColumns.push({
+    title: "测试列",
+    key: "taskId",
+    slot: true,
+    width: 100
+  })
+  console.log(TaskListColumns);
 };
 
-const ModalShow = ref(false);
+const TaskDetailModalShow = ref(false);
 </script>
 <style scoped>
 .TableAction{

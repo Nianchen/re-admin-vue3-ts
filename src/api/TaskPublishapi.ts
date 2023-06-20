@@ -1,6 +1,5 @@
 import { useStore } from "vuex";
 import Myhttp from "./request";
-
 import { UserLoginForm} from './TaskPublishType'
 import {AdminAddUserType} from './TaskPublishType'
 import { UpdataUserType } from "./TaskPublishType";
@@ -10,7 +9,9 @@ console.log(store);
 
 export async function Login(data:UserLoginForm) {
     const res =  await Myhttp.post('/admin/login',data)
+    console.log("🚀 ~ file: TaskPublishapi.ts:13 ~ Login ~ res:", res)
     if(res.data){
+        localStorage.setItem("Usertoken", res.data);
         return true
     }else{
         message.error(res.msg)
@@ -19,7 +20,7 @@ export async function Login(data:UserLoginForm) {
 }
 
 export async function LoginOut(){
-    const res = await Myhttp.get('/logout')
+    const res = await Myhttp.get('/admin/logout')
     if(res.data){
         localStorage.clear()
         return true
