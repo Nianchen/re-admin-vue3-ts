@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data-source="data" :pagination="false">
+  <a-table :columns="columns" :data-source="data" :pagination="true">
     <!-- 一般表头不需要什么变化 -->
     <template #bodyCell="{ column, record }">
       <template v-if="column.slot">

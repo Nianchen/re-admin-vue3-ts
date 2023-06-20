@@ -2,16 +2,15 @@ import { useStore } from "vuex";
 import Myhttp from "./request";
 
 import { UserLoginForm} from './TaskPublishType'
+import {AdminAddUserType} from './TaskPublishType'
+import { UpdataUserType } from "./TaskPublishType";
 import {message} from 'ant-design-vue'
 const store = useStore()
 console.log(store);
 
 export async function Login(data:UserLoginForm) {
-    const res =  await Myhttp.post('/login',data)
+    const res =  await Myhttp.post('/admin/login',data)
     if(res.data){
-        console.log('succcccccsssesss');
-        console.log(res.data);
-        
         return true
     }else{
         message.error(res.msg)
@@ -46,10 +45,9 @@ export async function GetUserByUsername(Username:string){
     return res
 }
 
-import {AdminAddUserType} from './TaskPublishType'
 export async function AdminAddUser(AddUserInfo:AdminAddUserType){
     const res = await Myhttp.post('/admin/user',AddUserInfo)
-    console.log(res);
+   return res
 }
 
 
@@ -59,8 +57,12 @@ export async function AdminDelUser(userId:string){
 }
 
 
-import { UpdataUserType } from "./TaskPublishType";
 export async function UpdataUser(Userinfo:UpdataUserType){
     const res = await Myhttp.put('/admin/user',Userinfo)
     return res
+}
+
+export async function AdminGetTaskList(){
+    const res = await Myhttp.get('/admin/taskList')
+    return res.data || []
 }

@@ -32,7 +32,7 @@
         </a-form>
       </a-modal>
     </div>
-    <div>
+    <div class="table_action">
       <a-input-search
         style="width: 30%"
         v-model:value="researchmessage"
@@ -56,7 +56,7 @@
     :data-source="dataSource"
     :row-selection="rowSelection"
     :pagination="{
-      pageSize: 7,
+      pageSize: 10,
     }"
   >
     <template #emptyText> 暂无数据 </template>
@@ -256,4 +256,10 @@ const onUpdata = () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.table_action
+{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+</style>

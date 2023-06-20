@@ -3,7 +3,6 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig, InternalAxiosReques
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 const router = useRouter()
-console.log("🚀 ~ file: request.ts:10 ~ router:", router)
 
 const request: AxiosInstance = axios.create({
     baseURL: "/api",
@@ -11,18 +10,17 @@ const request: AxiosInstance = axios.create({
 })
 const condition = false
 //使用token流程
-axios.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-        // 根据条件变量设置动态请求头
+request.interceptors.request.use(
+    config => {
         if (condition) {
             config.headers['Content-Type'] = 'multipart/form-data';
         } else {
             config.headers['Content-Type'] = 'application/json';
         }
         //然后处理token逻辑
-        config.headers['Authorization']= 'Bearer your-token';
-        console.log(config);
-        console.log("🚀 ~ file: request.ts:28 ~ config:", config)
+        if(localStorage.getItem("Usertoken")){
+            config.headers['token']= localStorage.getItem('Usertoken');
+        }
         return config;
     },
     (error) => {

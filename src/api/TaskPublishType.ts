@@ -32,3 +32,14 @@ export type AdminUpdataUserType = {
     status: number;
     userId: number;
 }
+
+export type TaskItem = {
+    taskId:number
+  taskName:string
+  taskMessage:string
+  sendUserId:number
+  sendTime:string
+  overTime:string
+  status:number
+  receiveUserId?:number
+}

@@ -55,24 +55,16 @@ const UserLoginInfo = reactive<UserLoginForm>({
   password: "",
   userType: 1,
 });
-// 本地测试环境登录流程
-// const Login_Submit = async () => {
-//     console.log(await Login(User_info));
-//     if(await Login(User_info)){
-//       router.push('/index')
-//     }
-// };
-
 import { Login } from "@/api/TaskPublishapi";
 async function Login_Submit() {
   // const res = await Login(UserLoginInfo)
   // if(res){
+  //     localStorage.setItem("Usertoken", JSON.stringify(res));
   //     router.push("/UserManage");
-  //     localStorage.setItem("User_info", JSON.stringify(UserLoginInfo));
   // }else{
   //   router.push('/')
   // }
-  router.push('/TaskManage')
+    router.push('/UserManage');
 }
 window.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {

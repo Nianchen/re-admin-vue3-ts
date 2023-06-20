@@ -1,7 +1,9 @@
 <template>
-  <div></div>
+  <!-- <div></div> -->
+  <Mytable></Mytable>
 </template>
-<script setup>
+<script setup lang="ts">
+import Mytable from './components/MyTable/index.vue'
 
 </script>
 <style scoped>

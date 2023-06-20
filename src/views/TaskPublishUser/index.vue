@@ -83,10 +83,11 @@ const collapsed = ref(false);
 const selectedKeys = ref(["1"]);
 const router = useRouter()
 const LogOut = async ()=>{
-  const res = await LoginOut()
-  if(res){
-    router.push('/Login')
-  }
+  // const res = await LoginOut()
+  // if(res){
+  //   router.push('/Login')
+  // }
+    router.push('/index')
 }
 </script>
 <style scoped>

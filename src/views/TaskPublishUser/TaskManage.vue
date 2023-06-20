@@ -1,5 +1,5 @@
 <template>
-  <a-button type="primary">添加新用户</a-button>
+  <a-button type="primary">添加任务</a-button>
   <MyTable :columns="TaskListColumns" :data="TaskListData">
     <template #taskId="{ row }">
       <a>
@@ -43,16 +43,8 @@
 import { reactive, ref } from "vue";
 import MyTable from "./components/MyTable/index.vue";
 import MyModal from "./components/MyModal/index.vue";
-type TaskItem = {
-  taskId:number
-  taskName:string
-  taskMessage:string
-  sendUserId:number
-  sendTime:string
-  overTime:string
-  status:number
-  receiveUserId?:number
-}
+import { AdminGetTaskList } from "@/api/TaskPublishapi";
+import { TaskItem } from "@/api/TaskPublishType";
 const TaskListColumns = [
   {
     title: "任务ID",
@@ -73,12 +65,12 @@ const TaskListColumns = [
   },
   {
     title: "开始时间",
-    key: "taskName",
+    key: "sendTime",
     width:150
   },
   {
     title: "结束时间",
-    key: "taskName",
+    key: "overTime",
     width:150
   },{
     title:'操作',
@@ -88,24 +80,15 @@ const TaskListColumns = [
   }
 ];
 
-const TaskListData = reactive<TaskItem[]>([
-  {
-    taskId:1,
-    taskMessage:'1111',
-    taskName:"测试任务",
-    sendUserId:1,
-    sendTime:'2023-06-12',
-    overTime:'2023-1-1',
-    status:1
-  },
-]);
+const TaskListData = reactive<TaskItem[]>([]);
+const initDataList = async () =>{
+  const TaskList = await AdminGetTaskList()
+  TaskListData.length = 0
+  TaskListData.push(...TaskList)
+}
+initDataList()
 //需要绑定成响应式的
 const addData = () => {
-  TaskListData.push({
-    name: "123",
-    age: 18,
-    id: 2,
-  });
   ModalShow.value = true;
 };
 

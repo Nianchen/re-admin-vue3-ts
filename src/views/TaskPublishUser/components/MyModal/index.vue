@@ -18,5 +18,6 @@ const props = defineProps({
   onOk: Function,
   onCancel:Function
 });
+
 </script>
 <style scoped></style>
