@@ -9,7 +9,6 @@ console.log(store);
 
 export async function Login(data:UserLoginForm) {
     const res =  await Myhttp.post('/admin/login',data)
-    console.log("🚀 ~ file: TaskPublishapi.ts:13 ~ Login ~ res:", res)
     if(res.data){
         localStorage.setItem("Usertoken", res.data);
         return true
@@ -66,4 +65,15 @@ export async function UpdataUser(Userinfo:UpdataUserType){
 export async function AdminGetTaskList(){
     const res = await Myhttp.get('/admin/taskList')
     return res.data || []
+}
+
+export async function AdminLogOut(){
+    const res = await Myhttp.get('/admin/logout')
+    console.log("🚀 ~ file: TaskPublishapi.ts:73 ~ AdminLogOut ~ res:", res)
+    if(res.code == 200){
+        localStorage.clear()
+        return true
+    }else{
+        return false
+    }
 }

@@ -1,6 +1,6 @@
 <template>
   <a-button type="primary" @click="addData">添加任务</a-button>
-  <MyTable :columns="TaskListColumns" :data="TaskListData" :config="TableConfig">
+  <MyTable :columns="TaskListColumns" :data="TaskListData">
     <template #taskId="{ row }">
       <a>
         {{ row.taskId }}
@@ -41,8 +41,8 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import MyTable from "./components/MyTable/index.vue";
-import MyModal from "./components/MyModal/index.vue";
+import MyTable from "@/components/MyTable/index.vue";
+import MyModal from "@/components/MyModal/index.vue";
 import { AdminGetTaskList } from "@/api/TaskPublishapi";
 import { TaskItem } from "@/api/TaskPublishType";
 const TaskListColumns = reactive([
@@ -97,7 +97,6 @@ const addData = () => {
     slot: true,
     width: 100
   })
-  console.log(TaskListColumns);
 };
 
 const TaskDetailModalShow = ref(false);

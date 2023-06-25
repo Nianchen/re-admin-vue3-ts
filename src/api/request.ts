@@ -3,14 +3,15 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import store from '../store'
 console.log("🚀 ~ file: request.ts:5 ~ store:", store)
 const request: AxiosInstance = axios.create({
-    baseURL: "/api",
+    // baseURL:  "/api",
+    baseURL:process.env.ENV=='development'?'/api':'http://127.0.0.1:8080',
     timeout: 6000
 })
 const condition = false
 //使用token流程
 request.interceptors.request.use(
     config => {
-        store.commit('SetAllLoading',true)
+        store.commit('SetAllLoading', true)
         if (condition) {
             config.headers['Content-Type'] = 'multipart/form-data';
         } else {
@@ -28,10 +29,16 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
     res => {
-        store.commit('SetAllLoading',false)
         const { status, data } = res
-        if (status == 200)
-            return data
+        if (status == 200) {
+            if (data.code == 60305) {
+                localStorage.setItem("Usertoken", data.data)
+                localStorage.setItem("NewToken", '111111')
+                location.reload()
+            } else {
+                return data
+            }
+        }
     }, (err: AxiosError) => {
         if (err.response) {
             console.log('ERR.response', err.response);

@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :data-source="data" :pagination="true"  :loading="loading">
+  <a-table :columns="columns" :data-source="data" :pagination="true"  >
     <!-- 一般表头不需要什么变化 -->
     <template #bodyCell="{ column, record }">
       <template v-if="column.slot">
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 const store = useStore()
-const loading = store.state.Loading
+// const loading = store.state.Loading
 const props = defineProps({
   columns: Array,
   data: Array,

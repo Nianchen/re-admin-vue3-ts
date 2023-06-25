@@ -2,7 +2,7 @@ const { defineConfig } = require("@vue/cli-service");
 
 console.log(process.env.VUE_APP_BASE_URL);
 module.exports = defineConfig({
-  publicPath:"/",
+  publicPath:"./",
   transpileDependencies: true,
   devServer:{
     proxy:{

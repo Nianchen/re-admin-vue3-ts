@@ -77,13 +77,14 @@ import {
   ArrowLeftOutlined,
 } from "@ant-design/icons-vue";
 import { ref } from "vue";
-import { LoginOut } from "@/api/TaskPublishapi";
+// import { LoginOut } from "@/api/TaskPublishapi";
+import {AdminLogOut} from '@/api/TaskPublishapi'
 import { useRouter } from "vue-router";
 const collapsed = ref(false);
 const selectedKeys = ref(["1"]);
 const router = useRouter()
 const LogOut = async ()=>{
-  const res = await LoginOut()
+  const res = await AdminLogOut()
   if(res){
     router.push('/Login')
   }
