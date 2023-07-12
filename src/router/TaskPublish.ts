@@ -44,7 +44,6 @@ router.beforeEach((to, from, next) => {
     //先做静态权限管理
     next()
   } else {
-    console.log(to.path);
     if (to.path == '/Login') {
       next()
     } else {

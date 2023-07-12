@@ -4,9 +4,8 @@ import { UserLoginForm} from './TaskPublishType'
 import {AdminAddUserType} from './TaskPublishType'
 import { UpdataUserType } from "./TaskPublishType";
 import {message} from 'ant-design-vue'
+import { Addform } from "./type";
 const store = useStore()
-console.log(store);
-
 export async function Login(data:UserLoginForm) {
     const res =  await Myhttp.post('/admin/login',data)
     if(res.data){
@@ -67,6 +66,11 @@ export async function AdminGetTaskList(){
     return res.data || []
 }
 
+export async function AdminAddNewTask(data:Addform){
+    const res = await Myhttp.post('/Task',data) 
+    console.log("🚀 ~ file: TaskPublishapi.ts:71 ~ AdminAddNewTask ~ res:", res)
+    return res
+}
 export async function AdminLogOut(){
     const res = await Myhttp.get('/admin/logout')
     console.log("🚀 ~ file: TaskPublishapi.ts:73 ~ AdminLogOut ~ res:", res)

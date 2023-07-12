@@ -31,3 +31,9 @@ export interface Tisk{
   id?:string;
 }
 
+export interface Addform {
+  taskName:string;
+  taskMessage:string;
+  overTime:string;
+}
+

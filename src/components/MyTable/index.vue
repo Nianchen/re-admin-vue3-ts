@@ -17,7 +17,6 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 const store = useStore()
-// const loading = store.state.Loading
 const props = defineProps({
   columns: Array,
   data: Array,

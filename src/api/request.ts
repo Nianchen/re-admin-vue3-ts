@@ -1,10 +1,9 @@
 import axios from 'axios'
 import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import store from '../store'
-console.log("🚀 ~ file: request.ts:5 ~ store:", store)
+const BASE_URL = process.env.VUE_APP_BASE_URL
 const request: AxiosInstance = axios.create({
-    // baseURL:  "/api",
-    baseURL:process.env.ENV=='development'?'/api':'http://127.0.0.1:8080',
+    baseURL:BASE_URL,
     timeout: 6000
 })
 const condition = false
